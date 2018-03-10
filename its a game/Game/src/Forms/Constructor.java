@@ -7,21 +7,18 @@ package Forms;
 
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
 import game.Question;
 import javax.swing.*;
-import java.awt.*;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.Vector;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import game.Pack;
+import java.util.Vector;
 
 /**
  *
@@ -48,6 +45,7 @@ public class Constructor extends javax.swing.JFrame {
         buttonGroup1.add(jRadioButton4);
         buttonGroup1.add(jRadioButton5);
         setValue(100);
+        changeStance(false);
     }
 
     /**
@@ -77,9 +75,6 @@ public class Constructor extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
-        jButton6 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -133,26 +128,6 @@ public class Constructor extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel4.setText("Запитання");
-
-        jButton6.setText("Створити нове питання");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
 
         jMenu1.setText("Файл");
 
@@ -223,15 +198,12 @@ public class Constructor extends javax.swing.JFrame {
                                     .addComponent(jTextField3)
                                     .addComponent(jTextField4)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton6)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel4))
+                                        .addGap(0, 0, Short.MAX_VALUE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2))
-                            .addComponent(jScrollPane1))
+                                .addComponent(jButton2)))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -257,11 +229,8 @@ public class Constructor extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(13, 13, 13)
-                                .addComponent(jLabel4))
-                            .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(13, 13, 13)
+                        .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
@@ -269,9 +238,7 @@ public class Constructor extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(311, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -302,9 +269,31 @@ public class Constructor extends javax.swing.JFrame {
         }
     }
 
+    void changeStance(boolean x) {
+        jLabel2.setEnabled(x);
+        jLabel2.setEnabled(x);
+        jLabel4.setEnabled(x);
+        jTextField3.setEnabled(x);
+        jTextField4.setEnabled(x);
+        jTextField5.setEnabled(x);
+        jButton1.setEnabled(x);
+        jButton2.setEnabled(x);
+        jTable1.setEnabled(x);
+        jRadioButton1.setEnabled(x);
+        jRadioButton2.setEnabled(x);
+        jRadioButton3.setEnabled(x);
+        jRadioButton4.setEnabled(x);
+        jRadioButton5.setEnabled(x);
+        
+        jTextField1.setEnabled(!x);
+        jButton3.setEnabled(!x);
+        jLabel1.setEnabled(!x);
+
+    }
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         testNameTemp = jTextField1.getText();
-        questionCount = 0;
+        changeStance(true);
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void save() {
@@ -341,7 +330,6 @@ public class Constructor extends javax.swing.JFrame {
     }
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
         if (!isSafe) {
             switch (JOptionPane.showConfirmDialog(null, "Ви не зберегли зміни. Зберегти?")) {
                 case JOptionPane.OK_OPTION: {
@@ -350,7 +338,7 @@ public class Constructor extends javax.swing.JFrame {
                     FileNameExtensionFilter filter = new FileNameExtensionFilter("Packs", "pac");
                     chooser.setFileFilter(filter);
                     int returnVal = chooser.showSaveDialog(null);
-                    if (returnVal == JFileChooser.APPROVE_OPTION) {//Запис у файл
+                    if (returnVal == JFileChooser.APPROVE_OPTION) {
                         String filename = chooser.getSelectedFile().getAbsolutePath();
                         String extentionTmp = filename.substring(filename.length() - 3, filename.length());
                         if (!"pac".equals(extentionTmp)) {
@@ -389,7 +377,7 @@ public class Constructor extends javax.swing.JFrame {
                     FileNameExtensionFilter filter = new FileNameExtensionFilter("Packs", "pac");
                     chooser.setFileFilter(filter);
                     int returnVal = chooser.showSaveDialog(null);
-                    if (returnVal == JFileChooser.APPROVE_OPTION) {//Запис у файл
+                    if (returnVal == JFileChooser.APPROVE_OPTION) {
                         String filename = chooser.getSelectedFile().getAbsolutePath();
                         String extentionTmp = filename.substring(filename.length() - 3, filename.length());
                         if (!"pac".equals(extentionTmp)) {
@@ -444,13 +432,15 @@ public class Constructor extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        NumberQuestion = Integer.parseInt(jTextField2.getText());
+        arr.set(NumberQuestion - 1, new Question(jTextField3.getText(), jTextField5.getText(), jTextField4.getText(), getValue()));
         if (arr.size() > 0) {
             Pack toSave = new Pack(testNameTemp, arr);
             JFileChooser chooser = new JFileChooser("/");
             FileNameExtensionFilter filter = new FileNameExtensionFilter("Packs", "pac");
             chooser.setFileFilter(filter);
             int returnVal = chooser.showSaveDialog(null);
-            if (returnVal == JFileChooser.APPROVE_OPTION) {//Запис у файл
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
                 String filename = chooser.getSelectedFile().getAbsolutePath();
                 String extentionTmp = filename.substring(filename.length() - 3, filename.length());
                 if (!"pac".equals(extentionTmp)) {
@@ -475,10 +465,9 @@ public class Constructor extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         NumberQuestion = Integer.parseInt(jTextField2.getText());
-        if ((jTextField3.getText() == "") && (jTextField4.getText() == "") && (jTextField5.getText() == "")) {
+        if ((jTextField3.getText() == "") || (jTextField4.getText() == "") || (jTextField5.getText() == "")) {
             return;
-        } else
-        if (NumberQuestion < arr.size()) {
+        } else if (NumberQuestion < arr.size()) {
 
             arr.set(NumberQuestion - 1, new Question(jTextField3.getText(),
                     jTextField5.getText(),
@@ -489,7 +478,7 @@ public class Constructor extends javax.swing.JFrame {
             showQuestion(NumberQuestion - 1);
 
         } else {
-            arr.add(NumberQuestion-1, new Question(jTextField3.getText(),
+            arr.add(NumberQuestion - 1, new Question(jTextField3.getText(),
                     jTextField5.getText(),
                     jTextField4.getText(), getValue()));
             arr.add(new Question("", "", "", 100));
@@ -501,20 +490,6 @@ public class Constructor extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-
-        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-        table.setRowCount(0);
-        for (int i = 0; i < arr.size(); i++) {
-            Vector row = new Vector();
-            row.add(arr.get(i).getText());
-            row.add(arr.get(i).getAnswer());
-            row.add(arr.get(i).getTheme());
-            row.add(arr.get(i).getValue());
-            table.addRow(row);
-        }
-    }//GEN-LAST:event_jButton6ActionPerformed
 
     private void showQuestion(int index) {
         Question tmp = arr.get(index);
@@ -579,7 +554,6 @@ public class Constructor extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -594,8 +568,6 @@ public class Constructor extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
