@@ -1,0 +1,9 @@
+Server: sql11.freemysqlhosting.net
+Name: sql11225345
+Username: sql11225345
+Password: PhiZHGwtgQ
+Port number: 3306
+
+
+1) різні логіни
+2) картінки для юзерів
