@@ -278,7 +278,6 @@ public class Constructor extends javax.swing.JFrame {
         jTextField5.setEnabled(x);
         jButton1.setEnabled(x);
         jButton2.setEnabled(x);
-        jTable1.setEnabled(x);
         jRadioButton1.setEnabled(x);
         jRadioButton2.setEnabled(x);
         jRadioButton3.setEnabled(x);
