@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package test11;
+package test111;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -19,13 +19,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.tree.DefaultTreeCellEditor;
 
 /**
  *
  * @author Andriy
  */
-public class Test11 extends JFrame implements Runnable{
+public class Test111 extends JFrame implements Runnable{
     static private Socket connection;
     static private ObjectOutputStream output;
     static private ObjectInputStream input;
@@ -33,11 +32,10 @@ public class Test11 extends JFrame implements Runnable{
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new Thread(new Test11("Test")).start();
-        new Thread(new Server()).start();
+        new Thread(new Test111("Test")).start();
     }
-
-    public Test11(String name)
+    
+    public Test111(String name)
     {
         super("Test");
         setLayout(new FlowLayout());
@@ -68,7 +66,6 @@ public class Test11 extends JFrame implements Runnable{
                 connection = new Socket(InetAddress.getByName("127.0.0.1"),11111);
                 output = new ObjectOutputStream(connection.getOutputStream());
                 input = new ObjectInputStream(connection.getInputStream());
-                JOptionPane.showMessageDialog(null, (String)input.readObject());
             } catch (IOException ex) {
             } catch (ClassNotFoundException ex) {
             }
@@ -81,8 +78,7 @@ public class Test11 extends JFrame implements Runnable{
             output.flush();
             output.writeObject(obj);
         } catch (IOException ex) {
-            Logger.getLogger(Test11.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Test111.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 }

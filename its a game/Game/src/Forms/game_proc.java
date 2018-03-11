@@ -6,7 +6,9 @@
 package Forms;
 
 import game.Client;
+import game.Pack;
 import game.user1;
+import game.userss;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
@@ -15,6 +17,7 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,7 +30,9 @@ public class game_proc extends javax.swing.JFrame {
     Client client;
     private Socket socketConnection;
     ObjectInputStream clientInputStream;
-    String testTmp;
+    Pack testTmp;
+    static public userss wq;
+    public ArrayList<userss> list_user = new ArrayList<>(); 
     /**
      * Creates new form game_proc
      */
@@ -35,14 +40,35 @@ public class game_proc extends javax.swing.JFrame {
         initComponents();
     }
     
-    public void startConnection(String ip,String clientName){
+    public void setList(ArrayList<userss> u)
+    {
+        list_user = u;
+    }
+    
+    public ArrayList<userss> getList()
+    {
+        return list_user;
+    }
+    
+    public void startConnection(String ip,String clientName, game_proc gp){
         client=new Client();
         client.setClientName(clientName);
         client.setIp(ip);
+        client.setGp(gp);
         client.setOutSource(jTable1);
         client.startClient();
     }
-
+    
+    public void refresh_interface()
+    {
+        int o = list_user.size();
+        if(o == 1)
+        {
+            jLabel20.setText(list_user.get(0).getLogin());
+            jLabel21.setText(list_user.get(0).getName_sur());
+            jLabel23.setText(String.valueOf(list_user.get(0).getBals()));
+        }
+    }
     
     public game_proc(String ip1) {
         initComponents();
@@ -51,13 +77,50 @@ public class game_proc extends javax.swing.JFrame {
         {
             socketConnection = new Socket (ip, 11111);  
             clientInputStream=new ObjectInputStream(socketConnection.getInputStream());
-            testTmp=(String)clientInputStream.readObject();
+            testTmp=(Pack)clientInputStream.readObject();
             clientInputStream.close();    
         }catch(Exception ex){
             System.out.println("Error");
         }
-        startConnection(ip,MainMenu.user.getLogin());
-        jLabel3.setText(testTmp);
+        startConnection(ip,MainMenu.user.getLogin(),this);
+        
+        
+        userss j = new userss();
+        j.setLogin(MainMenu.user.getLogin());
+        j.setName(MainMenu.user.getName_sur());
+        j.setBals(0);
+        list_user.add(j);
+        jLabel3.setText(testTmp.getName());
+        jLabel25.setText(list_user.get(0).getLogin());
+        jLabel26.setText(list_user.get(0).getName_sur());
+        jLabel32.setText(String.valueOf(list_user.get(0).getBals()));
+    }
+        
+    public game_proc(String ip1,String e) {
+        initComponents();
+        ip = ip1;
+        try
+        {
+            socketConnection = new Socket (ip, 11111);  
+            clientInputStream=new ObjectInputStream(socketConnection.getInputStream());
+            clientInputStream.readObject();
+            clientInputStream.close();    
+        }catch(Exception ex){
+            System.out.println("Error");
+        }
+        startConnection(ip,MainMenu.user.getLogin(),this);
+        
+        
+        userss j = new userss();
+        j.setLogin(MainMenu.user.getLogin());
+        j.setName(MainMenu.user.getName_sur());
+        j.setBals(0);
+        list_user.add(j);
+        jLabel3.setText(testTmp.getName());
+        jLabel20.setText(list_user.get(0).getLogin());
+        jLabel21.setText(list_user.get(0).getName_sur());
+        jLabel23.setText(String.valueOf(list_user.get(0).getBals()));
+        
     }
 
     /**
@@ -77,10 +140,21 @@ public class game_proc extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Назва паку");
+        jLabel1.setText("Назва паку:");
 
         jLabel2.setText("Чат:");
 
@@ -140,6 +214,74 @@ public class game_proc extends javax.swing.JFrame {
             }
         });
 
+        jLabel19.setText("Гравець №1");
+
+        jLabel20.setText("jLabel20");
+
+        jLabel21.setText("jLabel21");
+
+        jLabel22.setText("Кількість балів:");
+
+        jLabel23.setText("jLabel23");
+
+        jLabel24.setText("Гравець №2");
+
+        jLabel25.setText("jLabel25");
+
+        jLabel26.setText("jLabel26");
+
+        jLabel27.setText("Кількість балів:");
+
+        jLabel32.setText("jLabel32");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel21)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel22)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel23)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel24)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel27)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel32))
+                    .addComponent(jLabel26)
+                    .addComponent(jLabel25))
+                .addGap(167, 167, 167))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel24))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel25))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(jLabel26))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(jLabel23)
+                    .addComponent(jLabel27)
+                    .addComponent(jLabel32))
+                .addGap(0, 26, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,14 +290,6 @@ public class game_proc extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel3)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,19 +297,30 @@ public class game_proc extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)))))
+                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(28, 28, 28)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(388, 388, 388)
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addGap(22, 22, 22)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(333, 333, 333)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -281,8 +426,19 @@ public class game_proc extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    public javax.swing.JLabel jLabel20;
+    public javax.swing.JLabel jLabel21;
+    public javax.swing.JLabel jLabel22;
+    public javax.swing.JLabel jLabel23;
+    public javax.swing.JLabel jLabel24;
+    public javax.swing.JLabel jLabel25;
+    public javax.swing.JLabel jLabel26;
+    public javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
+    public javax.swing.JLabel jLabel32;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField3;

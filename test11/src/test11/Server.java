@@ -28,7 +28,7 @@ public class Server implements Runnable{
     public void run() {
         try 
         {
-            server = new ServerSocket(5678,10);
+            server = new ServerSocket(11111,10);
             while(true)
             {
                 connection = server.accept();

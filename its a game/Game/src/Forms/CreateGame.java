@@ -4,13 +4,16 @@
  * and open the template in the editor.
  */
 package Forms;
+import game.Pack;
 import game.Server;
 import game.ServerForPack;
 import java.net.*;
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -18,6 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class CreateGame extends javax.swing.JFrame{
     String ip1;
+    Pack pack;
     /**
      * Creates new form StartGame
      */
@@ -153,8 +157,8 @@ public class CreateGame extends javax.swing.JFrame{
 
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        /*JFileChooser chooser=new JFileChooser("/");
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Tests", "tst");
+        JFileChooser chooser=new JFileChooser("/");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Packs", "pac");
         chooser.setFileFilter(filter);
         int returnVal=chooser.showOpenDialog(null);
         if(returnVal == JFileChooser.APPROVE_OPTION)
@@ -164,31 +168,17 @@ public class CreateGame extends javax.swing.JFrame{
             {
                 FileInputStream fis = new FileInputStream(filename);
                 ObjectInputStream is = new ObjectInputStream(fis);
-                test=(Test)is.readObject();
-                jTextField1.setText(test.getName());
-                jLabel3.setText("Предмет:");
-                jLabel4.setText("Час на питання:");
-                jLabel5.setText(test.getSubject());
-                jLabel6.setText(String.valueOf(test.getTime()));
-
-                jLabel3.setVisible(true);
-                jLabel4.setVisible(true);
-                jLabel5.setVisible(true);
-                jLabel6.setVisible(true);
-                jLabel2.setEnabled(true);
-                jSpinner1.setEnabled(true);
-                SpinnerModel model=new SpinnerNumberModel(test.getQuestions().size(),1,test.getQuestions().size(),1);
-                jSpinner1.setModel(model);
+                pack=(Pack)is.readObject();
+                jTextField1.setText(pack.getName());
             }catch (ClassNotFoundException e){} catch (IOException ex) {}
-        }*/
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new Thread(new ServerForPack(jTextField1.getText())).start();
+        new Thread(new ServerForPack(pack)).start();
         new Thread(new Server()).start();
         game_proc form12 = new game_proc(ip1);
         form12.setTitle("Своя гра(хост)");
-        new Thread().start();
         form12.show();
         this.hide();
     }//GEN-LAST:event_jButton2ActionPerformed

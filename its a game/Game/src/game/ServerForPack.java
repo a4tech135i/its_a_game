@@ -5,6 +5,7 @@
  */
 package game;
 
+import Forms.MainMenu;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -25,13 +26,13 @@ import java.util.logging.Logger;
  */
 public class ServerForPack implements Runnable
 {
-    private String test;
+    private Pack test;
     private ServerSocket socketConnection;
     private ObjectOutputStream serverOutputStream;
     private serverKeeper keeper;
-    private String TT;
+    private Pack TT;
     
-    public ServerForPack(String t)
+    public ServerForPack(Pack t)
     {        
         /*keeper=new serverKeeper(t);
         keeper.start();*/
@@ -53,8 +54,8 @@ public class ServerForPack implements Runnable
     
     public class serverKeeper extends Thread
     {
-        String tmp;
-        public serverKeeper(String t){tmp=t;}
+        Pack tmp;
+        public serverKeeper(Pack t){tmp=t;}
         
         @Override
         public void run()
@@ -64,7 +65,7 @@ public class ServerForPack implements Runnable
                 test=tmp;
                 try
                 {
-                    socketConnection = new ServerSocket(11111, 10);
+                    socketConnection = new ServerSocket(11111, 3);
                     Socket pipe = socketConnection.accept();
                     serverOutputStream=new ObjectOutputStream(pipe.getOutputStream());
                     serverOutputStream.writeObject(test);

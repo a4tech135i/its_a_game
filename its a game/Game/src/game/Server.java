@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package game;
+import Forms.game_proc;
 import java.io.BufferedReader;
 import java.io.IOException;   
 import java.io.InputStreamReader;  
@@ -16,8 +17,9 @@ import java.util.Iterator;
 import java.util.List;
 import client.Constant;
 
+
 public class Server implements Runnable{
-    private List<Connection> connections = 
+  public List<Connection> connections = 
       Collections.synchronizedList(new ArrayList<Connection>());
   private ServerSocket server;
 
@@ -29,8 +31,7 @@ public class Server implements Runnable{
     public void run() {
         try 
         {
-            server = new ServerSocket(Constant.Port);
-
+            server = new ServerSocket(Constant.Port,3);
             while (true) {
               Socket socket = server.accept(); 
               Connection con = new Connection(socket);
@@ -91,35 +92,50 @@ private class Connection extends Thread {
         synchronized(connections) {
           Iterator<Connection> iter = connections.iterator();
           while(iter.hasNext()) {
-            ((Connection) iter.next()).out.println(name + " cames now");
+            ((Connection) iter.next()).out.println(name + " підключився");
           }
         }
         
         String str = "";
         while (true) {
-          str = in.readLine();
-          if(str.equals("exit")) break;
-          
-          
-          synchronized(connections) {
-            Iterator<Connection> iter = connections.iterator();
-            while(iter.hasNext()) {
-              if(str.equals("vidpovid"))
+            str = in.readLine();
+            if(str.equals("exit")) break;
+
+
+            synchronized(connections) {
+              Iterator<Connection> iter = connections.iterator();
+              while(iter.hasNext()) {
+              char a = str.charAt(0);
+              if(a == '%')
               {
-                  ((Connection) iter.next()).out.println("Система: Гравець під ніком " + name + " хоче відповідати!");
+                  ((Connection) iter.next()).out.println("Пришла інфа");
+                  userss j = new userss();
+                  String[] words = str.split("|");
+                  j.setLogin(words[1]);
+                  j.setName(words[2]);
+                  j.setBals(0);
+                  game_proc.wq = j;
               }
               else
               {
-                  ((Connection) iter.next()).out.println(name + ": " + str);
+                  if(str.equals("vidpovid"))
+                  {
+                      ((Connection) iter.next()).out.println("Система: Гравець під ніком " + name + " хоче відповідати!");
+                  }
+                  else
+                  {
+                      ((Connection) iter.next()).out.println(name + ": " + str);
+                  }
+              }
+                      //((Connection) iter.next()).out.println(name + ": " + str);
               }
             }
-          }
         }
         
         synchronized(connections) {
           Iterator<Connection> iter = connections.iterator();
           while(iter.hasNext()) {
-            ((Connection) iter.next()).out.println(name + " has left");
+            ((Connection) iter.next()).out.println(name + " вийшов");
           }
         }
       } catch (IOException e) {
