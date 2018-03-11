@@ -177,7 +177,7 @@ public class CreateGame extends javax.swing.JFrame{
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         new Thread(new ServerForPack(pack)).start();
         new Thread(new Server()).start();
-        game_proc form12 = new game_proc(ip1);
+        game_proc form12 = new game_proc(ip1,"123");
         form12.setTitle("Своя гра(хост)");
         form12.show();
         this.hide();

@@ -67,9 +67,7 @@ public class Test111 extends JFrame implements Runnable{
                 output = new ObjectOutputStream(connection.getOutputStream());
                 input = new ObjectInputStream(connection.getInputStream());
             } catch (IOException ex) {
-            } catch (ClassNotFoundException ex) {
-            }
-        }
+            } 
     }
     
     private static void sendData(Object obj)

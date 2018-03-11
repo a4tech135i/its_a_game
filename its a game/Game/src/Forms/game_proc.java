@@ -103,10 +103,10 @@ public class game_proc extends javax.swing.JFrame {
         {
             socketConnection = new Socket (ip, 11111);  
             clientInputStream=new ObjectInputStream(socketConnection.getInputStream());
-            clientInputStream.readObject();
+            testTmp=(Pack)clientInputStream.readObject();
             clientInputStream.close();    
         }catch(Exception ex){
-            System.out.println("Error");
+            System.out.println("Error123");
         }
         startConnection(ip,MainMenu.user.getLogin(),this);
         
@@ -121,6 +121,8 @@ public class game_proc extends javax.swing.JFrame {
         jLabel21.setText(list_user.get(0).getName_sur());
         jLabel23.setText(String.valueOf(list_user.get(0).getBals()));
         
+        
+        System.out.println(list_user.size());
     }
 
     /**
