@@ -110,7 +110,7 @@ public class game_proc extends javax.swing.JFrame {
         }
         startConnection(ip,MainMenu.user.getLogin(),this);
         
-        
+        //sfdsafasdf
         userss j = new userss();
         j.setLogin(MainMenu.user.getLogin());
         j.setName(MainMenu.user.getName_sur());
