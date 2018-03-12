@@ -57,6 +57,16 @@ public class Pack implements Serializable {
         return tmp;
     }
 
+    public ArrayList<String> getTheme() {
+        
+        ArrayList<String> tmp = new ArrayList<String>();
+
+        for (int i = 0; i < Questions.size(); i++) {
+            if(!tmp.contains(Questions.get(i).getTheme())) tmp.add(Questions.get(i).getTheme());
+        }
+        return tmp;
+    }
+    
     public Pack(int n, Pack test) {
         Name = test.getName();
         Questions = new ArrayList<>();
