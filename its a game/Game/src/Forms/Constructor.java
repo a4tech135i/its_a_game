@@ -428,8 +428,8 @@ public class Constructor extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         
-        if ((jTextField3.getText() == null) || (jTextField4.getText() == null) || (jTextField5.getText() == null) || (!jTextField3.equals("")) 
-                || (!jTextField4.equals("")) || (!jTextField5.equals(""))) {
+        if ((jTextField3.getText() == null) || (jTextField4.getText() == null) || (jTextField5.getText() == null) || (jTextField3.equals("")) 
+                || (jTextField4.equals("")) || (jTextField5.equals(""))) {
             return;
         }
         NumberQuestion = Integer.parseInt(jTextField2.getText());
