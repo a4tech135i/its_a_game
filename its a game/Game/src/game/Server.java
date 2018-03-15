@@ -108,13 +108,9 @@ private class Connection extends Thread {
               char a = str.charAt(0);
               if(a == '%')
               {
-                  ((Connection) iter.next()).out.println("Пришла інфа");
                   userss j = new userss();
                   String[] words = str.split("|");
-                  j.setLogin(words[1]);
-                  j.setName(words[2]);
-                  j.setBals(0);
-                  game_proc.wq = j;
+                  ((Connection) iter.next()).out.println("Система: Гравець під ніком " + name + " набрав таку кількість балів = "+words[1]);
               }
               else
               {

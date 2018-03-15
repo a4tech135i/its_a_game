@@ -32,17 +32,25 @@ import javax.swing.table.DefaultTableModel;
 public class game_proc extends javax.swing.JFrame {
 
     String ip;
-    Client client;
+    static Client client;
     private Socket socketConnection;
     ObjectInputStream clientInputStream;
     Pack testTmp;
     static int balss = 0;
+    static boolean yksho_1_raund = false;
+    static boolean lll = false;
+    static int kikl_raund = 1;
+    static int tep_raund = 1;
     static public userss wq;
     public ArrayList<userss> list_user = new ArrayList<>();
     public ArrayList<JButton> b7 = new ArrayList<>();
     public ArrayList<JButton> b8 = new ArrayList<>();
     public ArrayList<JButton> b9 = new ArrayList<>();
     public ArrayList<JButton> b10 = new ArrayList<>();
+    ArrayList<String> raund1 = new ArrayList<String>();
+    ArrayList<String> raund2 = new ArrayList<String>();
+    ArrayList<String> raund3 = new ArrayList<String>();
+    ArrayList<String> raund4 = new ArrayList<String>();
 
     /**
      * Creates new form game_proc
@@ -79,6 +87,7 @@ public class game_proc extends javax.swing.JFrame {
 
     public game_proc(String ip1) {
         initComponents();
+        jButton1.setVisible(false);
         ip = ip1;
         try {
             socketConnection = new Socket(ip, 11111);
@@ -95,14 +104,15 @@ public class game_proc extends javax.swing.JFrame {
         j.setBals(0);
         list_user.add(j);
         jLabel3.setText(testTmp.getName());
-        jLabel25.setText(list_user.get(0).getLogin());
-        jLabel26.setText(list_user.get(0).getName_sur());
-        jLabel32.setText(String.valueOf(list_user.get(0).getBals()));
+        jLabel20.setText(list_user.get(0).getLogin());
+        jLabel21.setText(list_user.get(0).getName_sur());
+        jLabel23.setText(String.valueOf(list_user.get(0).getBals()));
         Interface();
         Thread run = new Thread(new Runnable() {
             @Override
             public void run() {
-                while(true){
+                boolean zmina_dlya_sekundametra = true;
+                while(zmina_dlya_sekundametra){
                     try {
                         jLabel23.setText(String.valueOf(balss));
                         if(!jButton3.isVisible() && !jButton4.isVisible() && !jButton5.isVisible() && !jButton6.isVisible() && !jButton7.isVisible() 
@@ -111,12 +121,45 @@ public class game_proc extends javax.swing.JFrame {
                                 && !jButton17.isVisible() && !jButton18.isVisible() && !jButton19.isVisible() && !jButton20.isVisible() && !jButton21.isVisible() 
                                 && !jButton22.isVisible() && !jButton23.isVisible() && !jButton24.isVisible() && !jButton25.isVisible() && !jButton26.isVisible())
                         {
-                            JOptionPane.showMessageDialog(null, "Раунд 2!");
+                            if(tep_raund==kikl_raund)
+                            {
+                                zmina_dlya_sekundametra = false;
+                                yksho_1_raund = true;
+                            }
+                            if(kikl_raund>1)
+                            {
+                                lll = true;
+                                tep_raund++;
+                                //JOptionPane.showMessageDialog(null, "Раунд "+tep_raund+"!");
+                                if(tep_raund<=kikl_raund)
+                                {
+                                    if(tep_raund == 2)
+                                    {
+                                        nextRaund2(); 
+                                    }
+                                    if(tep_raund == 3)
+                                    {
+                                        nextRaund3(); 
+                                    }
+                                    if(tep_raund == 4)
+                                    {
+                                        nextRaund4(); 
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                //JOptionPane.showMessageDialog(null, "Кількість набраних балів = " + balss+ "\nПак закінчився!");
+                                zmina_dlya_sekundametra = false;
+                                yksho_1_raund = true;
+                            }
+                            
                         }
                         Thread.sleep(1000); //1000 - 1 сек
                     } catch (InterruptedException ex) {
                     }
                 }
+                Thread.interrupted();
             }
         });
         run.start();
@@ -124,6 +167,7 @@ public class game_proc extends javax.swing.JFrame {
 
     public game_proc(String ip1, String e) {
         initComponents();
+        jButton1.setVisible(false);
         ip = ip1;
         try {
             socketConnection = new Socket(ip, 11111);
@@ -134,8 +178,6 @@ public class game_proc extends javax.swing.JFrame {
             System.out.println("Error123");
         }
         startConnection(ip, MainMenu.user.getLogin(), this);
-
-        //sfdsafasdf
         userss j = new userss();
         j.setLogin(MainMenu.user.getLogin());
         j.setName(MainMenu.user.getName_sur());
@@ -149,7 +191,8 @@ public class game_proc extends javax.swing.JFrame {
         Thread run = new Thread(new Runnable() {
             @Override
             public void run() {
-                while(true){
+                boolean zmina_dlya_sekundametra = true;
+                while(zmina_dlya_sekundametra){
                     try {
                         jLabel23.setText(String.valueOf(balss));
                         if(!jButton3.isVisible() && !jButton4.isVisible() && !jButton5.isVisible() && !jButton6.isVisible() && !jButton7.isVisible() 
@@ -158,12 +201,45 @@ public class game_proc extends javax.swing.JFrame {
                                 && !jButton17.isVisible() && !jButton18.isVisible() && !jButton19.isVisible() && !jButton20.isVisible() && !jButton21.isVisible() 
                                 && !jButton22.isVisible() && !jButton23.isVisible() && !jButton24.isVisible() && !jButton25.isVisible() && !jButton26.isVisible())
                         {
-                            JOptionPane.showMessageDialog(null, "Раунд 2!");
+                            if(tep_raund==kikl_raund)
+                            {
+                                zmina_dlya_sekundametra = false;
+                                yksho_1_raund = true;
+                            }
+                            if(kikl_raund>1)
+                            {
+                                lll = true;
+                                tep_raund++;
+                                //JOptionPane.showMessageDialog(null, "Раунд "+tep_raund+"!");
+                                if(tep_raund<=kikl_raund)
+                                {
+                                    if(tep_raund == 2)
+                                    {
+                                        nextRaund2(); 
+                                    }
+                                    if(tep_raund == 3)
+                                    {
+                                        nextRaund3(); 
+                                    }
+                                    if(tep_raund == 4)
+                                    {
+                                        nextRaund4(); 
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                //JOptionPane.showMessageDialog(null, "Кількість набраних балів = " + balss+ "\nПак закінчився!");
+                                zmina_dlya_sekundametra = false;
+                                yksho_1_raund = true;
+                            }
+                            
                         }
                         Thread.sleep(1000); //1000 - 1 сек
                     } catch (InterruptedException ex) {
                     }
                 }
+                Thread.interrupted();
             }
         });
         run.start();
@@ -171,13 +247,13 @@ public class game_proc extends javax.swing.JFrame {
 
     private void Interface() {
         ArrayList<String> temu = new ArrayList<String>();
-        ArrayList<String> raund1 = new ArrayList<String>();
+        /*ArrayList<String> raund1 = new ArrayList<String>();
         ArrayList<String> raund2 = new ArrayList<String>();
         ArrayList<String> raund3 = new ArrayList<String>();
-        ArrayList<String> raund4 = new ArrayList<String>();
+        ArrayList<String> raund4 = new ArrayList<String>();*/
         temu = testTmp.getTheme();
         int a = temu.size();
-        int kikl_raund = 1;
+        
         System.out.println(a);
         if (a > 5) {
             kikl_raund++;
@@ -215,42 +291,47 @@ public class game_proc extends javax.swing.JFrame {
             ryad5(false);
             jButton8.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(0) + " 100");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 100));
+                    form12.setTitle(raund1.get(0) + " за 100");
                     form12.show();
                     jButton8.setVisible(false);
+                    jButton8.removeActionListener(this);
                 }
             });
             jButton9.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(0) + " 200");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 200));
+                    form12.setTitle(raund1.get(0) + " за 200");
                     form12.show();
                     jButton9.setVisible(false);
+                    jButton9.removeActionListener(this);
                 }
             });
             jButton10.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(0) + " 300");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 300));
+                    form12.setTitle(raund1.get(0) + " за 300");
                     form12.show();
                     jButton10.setVisible(false);
+                    jButton10.removeActionListener(this);
                 }
             });
             jButton11.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(0) + " 400");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 400));
+                    form12.setTitle(raund1.get(0) + " за 400");
                     form12.show();
                     jButton11.setVisible(false);
+                    jButton11.removeActionListener(this);
                 }
             });
             jButton7.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(0) + " 500");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 500));
+                    form12.setTitle(raund1.get(0) + " за 500");
                     form12.show();
                     jButton7.setVisible(false);
+                    jButton7.removeActionListener(this);
                 }
             });
         }
@@ -262,82 +343,92 @@ public class game_proc extends javax.swing.JFrame {
             ryad5(false);
             jButton8.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(0) + " 100");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 100));
+                    form12.setTitle(raund1.get(0) + " за 100");
                     form12.show();
                     jButton8.setVisible(false);
+                    jButton8.removeActionListener(this);
                 }
             });
             jButton9.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(0) + " 200");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 200));
+                    form12.setTitle(raund1.get(0) + " за 200");
                     form12.show();
                     jButton9.setVisible(false);
+                    jButton9.removeActionListener(this);
                 }
             });
             jButton10.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(0) + " 300");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 300));
+                    form12.setTitle(raund1.get(0) + " за 300");
                     form12.show();
                     jButton10.setVisible(false);
+                    jButton10.removeActionListener(this);
                 }
             });
             jButton11.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(0) + " 400");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 400));
+                    form12.setTitle(raund1.get(0) + " за 400");
                     form12.show();
                     jButton11.setVisible(false);
+                    jButton11.removeActionListener(this);
                 }
             });
             jButton7.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(0) + " 500");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 500));
+                    form12.setTitle(raund1.get(0) + " за 500");
                     form12.show();
                     jButton7.setVisible(false);
+                    jButton7.removeActionListener(this);
                 }
             });
             jButton3.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(1) + " 100");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(1), 100));
+                    form12.setTitle(raund1.get(1) + " за 100");
                     form12.show();
                     jButton3.setVisible(false);
+                    jButton3.removeActionListener(this);
                 }
             });
             jButton4.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(1) + " 200");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(1), 200));
+                    form12.setTitle(raund1.get(1) + " за 200");
                     form12.show();
                     jButton4.setVisible(false);
+                    jButton4.removeActionListener(this);
                 }
             });
             jButton5.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(1) + " 300");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(1), 300));
+                    form12.setTitle(raund1.get(1) + " за 300");
                     form12.show();
                     jButton5.setVisible(false);
+                    jButton5.removeActionListener(this);
                 }
             });
             jButton6.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(1) + " 400");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(1), 400));
+                    form12.setTitle(raund1.get(1) + " за 400");
                     form12.show();
                     jButton6.setVisible(false);
+                    jButton6.removeActionListener(this);
                 }
             });
             jButton12.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(1) + " 500");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(1), 500));
+                    form12.setTitle(raund1.get(1) + " за 500");
                     form12.show();
                     jButton12.setVisible(false);
+                    jButton12.removeActionListener(this);
                 }
             });
         }
@@ -349,122 +440,137 @@ public class game_proc extends javax.swing.JFrame {
             ryad5(false);
             jButton8.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(0) + " 100");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 100));
+                    form12.setTitle(raund1.get(0) + " за 100");
                     form12.show();
                     jButton8.setVisible(false);
+                    jButton8.removeActionListener(this);
                 }
             });
             jButton9.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(0) + " 200");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 200));
+                    form12.setTitle(raund1.get(0) + " за 200");
                     form12.show();
                     jButton9.setVisible(false);
+                    jButton9.removeActionListener(this);
                 }
             });
             jButton10.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(0) + " 300");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 300));
+                    form12.setTitle(raund1.get(0) + " за 300");
                     form12.show();
                     jButton10.setVisible(false);
+                    jButton10.removeActionListener(this);
                 }
             });
             jButton11.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(0) + " 400");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 400));
+                    form12.setTitle(raund1.get(0) + " за 400");
                     form12.show();
                     jButton11.setVisible(false);
+                    jButton11.removeActionListener(this);
                 }
             });
             jButton7.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(0) + " 500");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 500));
+                    form12.setTitle(raund1.get(0) + " за 500");
                     form12.show();
                     jButton7.setVisible(false);
+                    jButton7.removeActionListener(this);
                 }
             });
             jButton3.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(1) + " 100");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(1), 100));
+                    form12.setTitle(raund1.get(1) + " за 100");
                     form12.show();
                     jButton3.setVisible(false);
+                    jButton3.removeActionListener(this);
                 }
             });
             jButton4.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(1) + " 200");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(1), 200));
+                    form12.setTitle(raund1.get(1) + " за 200");
                     form12.show();
                     jButton4.setVisible(false);
+                    jButton4.removeActionListener(this);
                 }
             });
             jButton5.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(1) + " 300");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(1), 300));
+                    form12.setTitle(raund1.get(1) + " за 300");
                     form12.show();
                     jButton5.setVisible(false);
+                    jButton5.removeActionListener(this);
                 }
             });
             jButton6.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(1) + " 400");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(1), 400));
+                    form12.setTitle(raund1.get(1) + " за 400");
                     form12.show();
                     jButton6.setVisible(false);
+                    jButton6.removeActionListener(this);
                 }
             });
             jButton12.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(1) + " 500");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(1), 500));
+                    form12.setTitle(raund1.get(1) + " за 500");
                     form12.show();
                     jButton12.setVisible(false);
+                    jButton12.removeActionListener(this);
                 }
             });
             jButton18.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(2) + " 100");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(2), 100));
+                    form12.setTitle(raund1.get(2) + " за 100");
                     form12.show();
-                    jButton3.setVisible(false);
+                    jButton18.setVisible(false);
+                    jButton18.removeActionListener(this);
                 }
             });
             jButton14.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(2) + " 200");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(2), 200));
+                    form12.setTitle(raund1.get(2) + " за 200");
                     form12.show();
-                    jButton4.setVisible(false);
+                    jButton14.setVisible(false);
+                    jButton14.removeActionListener(this);
                 }
             });
             jButton23.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(2) + " 300");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(2), 300));
+                    form12.setTitle(raund1.get(2) + " за 300");
                     form12.show();
-                    jButton5.setVisible(false);
+                    jButton23.setVisible(false);
+                    jButton23.removeActionListener(this);
                 }
             });
             jButton16.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(2) + " 400");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(2), 400));
+                    form12.setTitle(raund1.get(2) + " за 400");
                     form12.show();
-                    jButton6.setVisible(false);
+                    jButton16.setVisible(false);
+                    jButton16.removeActionListener(this);
                 }
             });
             jButton17.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(2) + " 500");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(2), 500));
+                    form12.setTitle(raund1.get(2) + " за 500");
                     form12.show();
-                    jButton12.setVisible(false);
+                    jButton17.setVisible(false);
+                    jButton17.removeActionListener(this);
                 }
             });
         }
@@ -476,162 +582,181 @@ public class game_proc extends javax.swing.JFrame {
             ryad5(false);
             jButton8.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(0) + " 100");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 100));
+                    form12.setTitle(raund1.get(0) + " за 100");
                     form12.show();
                     jButton8.setVisible(false);
+                    jButton8.removeActionListener(this);
                 }
             });
             jButton9.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(0) + " 200");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 200));
+                    form12.setTitle(raund1.get(0) + " за 200");
                     form12.show();
                     jButton9.setVisible(false);
+                    jButton9.removeActionListener(this);
                 }
             });
             jButton10.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(0) + " 300");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 300));
+                    form12.setTitle(raund1.get(0) + " за 300");
                     form12.show();
                     jButton10.setVisible(false);
+                    jButton10.removeActionListener(this);
                 }
             });
             jButton11.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(0) + " 400");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 400));
+                    form12.setTitle(raund1.get(0) + " за 400");
                     form12.show();
                     jButton11.setVisible(false);
+                    jButton11.removeActionListener(this);
                 }
             });
             jButton7.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(0) + " 500");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 500));
+                    form12.setTitle(raund1.get(0) + " за 500");
                     form12.show();
                     jButton7.setVisible(false);
+                    jButton7.removeActionListener(this);
                 }
             });
             jButton3.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(1) + " 100");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(1), 100));
+                    form12.setTitle(raund1.get(1) + " за 100");
                     form12.show();
                     jButton3.setVisible(false);
+                    jButton3.removeActionListener(this);
                 }
             });
             jButton4.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(1) + " 200");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(1), 200));
+                    form12.setTitle(raund1.get(1) + " за 200");
                     form12.show();
                     jButton4.setVisible(false);
+                    jButton4.removeActionListener(this);
                 }
             });
             jButton5.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(1) + " 300");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(1), 300));
+                    form12.setTitle(raund1.get(1) + " за 300");
                     form12.show();
                     jButton5.setVisible(false);
+                    jButton5.removeActionListener(this);
                 }
             });
             jButton6.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(1) + " 400");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(1), 400));
+                    form12.setTitle(raund1.get(1) + " за 400");
                     form12.show();
                     jButton6.setVisible(false);
+                    jButton6.removeActionListener(this);
                 }
             });
             jButton12.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(1) + " 500");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(1), 500));
+                    form12.setTitle(raund1.get(1) + " за 500");
                     form12.show();
                     jButton12.setVisible(false);
+                    jButton12.removeActionListener(this);
                 }
             });
             jButton18.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(2) + " 100");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(2), 100));
+                    form12.setTitle(raund1.get(2) + " за 100");
                     form12.show();
-                    jButton3.setVisible(false);
+                    jButton18.setVisible(false);
+                    jButton18.removeActionListener(this);
                 }
             });
             jButton14.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(2) + " 200");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(2), 200));
+                    form12.setTitle(raund1.get(2) + " за 200");
                     form12.show();
-                    jButton4.setVisible(false);
+                    jButton14.setVisible(false);
+                    jButton14.removeActionListener(this);
                 }
             });
             jButton23.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(2) + " 300");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(2), 300));
+                    form12.setTitle(raund1.get(2) + " за 300");
                     form12.show();
-                    jButton5.setVisible(false);
+                    jButton23.setVisible(false);
+                    jButton23.removeActionListener(this);
                 }
             });
             jButton16.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(2) + " 400");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(2), 400));
+                    form12.setTitle(raund1.get(2) + " за 400");
                     form12.show();
-                    jButton6.setVisible(false);
+                    jButton16.setVisible(false);
+                    jButton16.removeActionListener(this);
                 }
             });
             jButton17.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(2) + " 500");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(2), 500));
+                    form12.setTitle(raund1.get(2) + " за 500");
                     form12.show();
-                    jButton12.setVisible(false);
+                    jButton17.setVisible(false);
+                    jButton17.removeActionListener(this);
                 }
             });
             jButton13.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(3) + " 100");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(3), 100));
+                    form12.setTitle(raund1.get(3) + " за 100");
                     form12.show();
-                    jButton3.setVisible(false);
+                    jButton13.setVisible(false);
+                    jButton13.removeActionListener(this);
                 }
             });
             jButton20.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(3) + " 200");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(3), 200));
+                    form12.setTitle(raund1.get(3) + " за 200");
                     form12.show();
-                    jButton4.setVisible(false);
+                    jButton20.setVisible(false);
+                    jButton20.removeActionListener(this);
                 }
             });
             jButton15.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(3) + " 300");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(3), 300));
+                    form12.setTitle(raund1.get(3) + " за 300");
                     form12.show();
-                    jButton5.setVisible(false);
+                    jButton15.setVisible(false);
+                    jButton15.removeActionListener(this);
                 }
             });
             jButton25.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(3) + " 400");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(3), 400));
+                    form12.setTitle(raund1.get(3) + " за 400");
                     form12.show();
-                    jButton6.setVisible(false);
+                    jButton25.setVisible(false);jButton25.removeActionListener(this);
                 }
             });
             jButton26.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(3) + " 500");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(3), 500));
+                    form12.setTitle(raund1.get(3) + " за 500");
                     form12.show();
-                    jButton12.setVisible(false);
+                    jButton26.setVisible(false);
+                    jButton26.removeActionListener(this);
                 }
             });
         }
@@ -643,208 +768,2154 @@ public class game_proc extends javax.swing.JFrame {
             jLabel10.setText(raund1.get(4));
             jButton8.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(0) + " 100");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 100));
+                    form12.setTitle(raund1.get(0) + " за 100");
+                    form12.show();
+                    jButton8.setVisible(false);
+                    jButton8.removeActionListener(this);
+                }
+            });
+            jButton9.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 200));
+                    form12.setTitle(raund1.get(0) + " за 200");
+                    form12.show();
+                    jButton9.setVisible(false);
+                    jButton9.removeActionListener(this);
+                }
+            });
+            jButton10.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 300));
+                    form12.setTitle(raund1.get(0) + " за 300");
+                    form12.show();
+                    jButton10.setVisible(false);
+                    jButton10.removeActionListener(this);
+                }
+            });
+            jButton11.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 400));
+                    form12.setTitle(raund1.get(0) + " за 400");
+                    form12.show();
+                    jButton11.setVisible(false);
+                    jButton11.removeActionListener(this);
+                }
+            });
+            jButton7.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 500));
+                    form12.setTitle(raund1.get(0) + " за 500");
+                    form12.show();
+                    jButton7.setVisible(false);
+                    jButton7.removeActionListener(this);
+                }
+            });
+            jButton3.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(1), 100));
+                    form12.setTitle(raund1.get(1) + " за 100");
+                    form12.show();
+                    jButton3.setVisible(false);
+                    jButton3.removeActionListener(this);
+                }
+            });
+            jButton4.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(1), 200));
+                    form12.setTitle(raund1.get(1) + " за 200");
+                    form12.show();
+                    jButton4.setVisible(false);
+                    jButton4.removeActionListener(this);
+                }
+            });
+            jButton5.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(1), 300));
+                    form12.setTitle(raund1.get(1) + " за 300");
+                    form12.show();
+                    jButton5.setVisible(false);
+                    jButton5.removeActionListener(this);
+                }
+            });
+            jButton6.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(1), 400));
+                    form12.setTitle(raund1.get(1) + " за 400");
+                    form12.show();
+                    jButton6.setVisible(false);
+                    jButton6.removeActionListener(this);
+                }
+            });
+            jButton12.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(1), 500));
+                    form12.setTitle(raund1.get(1) + " за 500");
+                    form12.show();
+                    jButton12.setVisible(false);jButton12.removeActionListener(this);
+                }
+            });
+            jButton18.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(2), 100));
+                    form12.setTitle(raund1.get(2) + " за 100");
+                    form12.show();
+                    jButton18.setVisible(false);jButton18.removeActionListener(this);
+                }
+            });
+            jButton14.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(2), 200));
+                    form12.setTitle(raund1.get(2) + " за 200");
+                    form12.show();
+                    jButton14.setVisible(false);jButton14.removeActionListener(this);
+                }
+            });
+            jButton23.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(2), 300));
+                    form12.setTitle(raund1.get(2) + " за 300");
+                    form12.show();
+                    jButton23.setVisible(false);jButton23.removeActionListener(this);
+                }
+            });
+            jButton16.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(2), 400));
+                    form12.setTitle(raund1.get(2) + " за 400");
+                    form12.show();
+                    jButton16.setVisible(false);jButton16.removeActionListener(this);
+                }
+            });
+            jButton17.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(2), 500));
+                    form12.setTitle(raund1.get(2) + " за 500");
+                    form12.show();
+                    jButton17.setVisible(false);jButton17.removeActionListener(this);
+                }
+            });
+            jButton13.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(3), 100));
+                    form12.setTitle(raund1.get(3) + " за 100");
+                    form12.show();
+                    jButton13.setVisible(false);jButton13.removeActionListener(this);
+                }
+            });
+            jButton20.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(3), 200));
+                    form12.setTitle(raund1.get(3) + " за 200");
+                    form12.show();
+                    jButton20.setVisible(false);jButton8.removeActionListener(this);
+                }
+            });
+            jButton15.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(3), 300));
+                    form12.setTitle(raund1.get(3) + " за 300");
+                    form12.show();
+                    jButton15.setVisible(false);jButton15.removeActionListener(this);
+                }
+            });
+            jButton25.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(3), 400));
+                    form12.setTitle(raund1.get(3) + " за 400");
+                    form12.show();
+                    jButton25.setVisible(false);jButton25.removeActionListener(this);
+                }
+            });
+            jButton26.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(3), 500));
+                    form12.setTitle(raund1.get(3) + " за 500");
+                    form12.show();
+                    jButton26.setVisible(false);jButton26.removeActionListener(this);
+                }
+            });
+            jButton19.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(4), 100));
+                    form12.setTitle(raund1.get(4) + " за 100");
+                    form12.show();
+                    jButton19.setVisible(false);jButton19.removeActionListener(this);
+                }
+            });
+            jButton21.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(4), 200));
+                    form12.setTitle(raund1.get(4) + " за 200");
+                    form12.show();
+                    jButton21.setVisible(false);jButton21.removeActionListener(this);
+                }
+            });
+            jButton22.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(4), 300));
+                    form12.setTitle(raund1.get(4) + " за 300");
+                    form12.show();
+                    jButton22.setVisible(false);jButton22.removeActionListener(this);
+                }
+            });
+            jButton24.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(4), 400));
+                    form12.setTitle(raund1.get(4) + " за 400");
+                    form12.show();
+                    jButton24.setVisible(false);jButton24.removeActionListener(this);
+                }
+            });
+            jButton27.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(4), 500));
+                    form12.setTitle(raund1.get(4) + " за 500");
+                    form12.show();
+                    jButton27.setVisible(false);jButton27.removeActionListener(this);
+                }
+            });
+        }
+    }
+    
+    private void nextRaund2()
+    {
+        jLabel16.setText(tep_raund + " з " + kikl_raund);
+        ryad1(true);
+        ryad2(true);
+        ryad3(true);
+        ryad4(true);
+        ryad5(true);
+        //jButton8.removeActionListener(jButton8.getAction());
+        if (raund2.size() == 1) {
+            jLabel6.setText(raund2.get(0));
+            ryad2(false);
+            ryad3(false);
+            ryad4(false);
+            ryad5(false);
+            jButton8.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 100));
+                    form12.setTitle(raund2.get(0) + " за 100");
                     form12.show();
                     jButton8.setVisible(false);
                 }
             });
             jButton9.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(0) + " 200");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 200));
+                    form12.setTitle(raund2.get(0) + " за 200");
                     form12.show();
                     jButton9.setVisible(false);
                 }
             });
             jButton10.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(0) + " 300");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 300));
+                    form12.setTitle(raund2.get(0) + " за 300");
                     form12.show();
                     jButton10.setVisible(false);
                 }
             });
             jButton11.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(0) + " 400");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 400));
+                    form12.setTitle(raund2.get(0) + " за 400");
                     form12.show();
                     jButton11.setVisible(false);
                 }
             });
             jButton7.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(0) + " 500");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 500));
+                    form12.setTitle(raund2.get(0) + " за 500");
+                    form12.show();
+                    jButton7.setVisible(false);
+                }
+            });
+        }
+        if (raund2.size() == 2) {
+            jLabel6.setText(raund2.get(0));
+            jLabel8.setText(raund2.get(1));
+            ryad3(false);
+            ryad4(false);
+            ryad5(false);
+            jButton8.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 100));
+                    form12.setTitle(raund2.get(0) + " за 100");
+                    form12.show();
+                    jButton8.setVisible(false);
+                }
+            });
+            jButton9.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 200));
+                    form12.setTitle(raund2.get(0) + " за 200");
+                    form12.show();
+                    jButton9.setVisible(false);
+                }
+            });
+            jButton10.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 300));
+                    form12.setTitle(raund2.get(0) + " за 300");
+                    form12.show();
+                    jButton10.setVisible(false);
+                }
+            });
+            jButton11.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 400));
+                    form12.setTitle(raund2.get(0) + " за 400");
+                    form12.show();
+                    jButton11.setVisible(false);
+                }
+            });
+            jButton7.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 500));
+                    form12.setTitle(raund2.get(0) + " за 500");
                     form12.show();
                     jButton7.setVisible(false);
                 }
             });
             jButton3.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(1) + " 100");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(1), 100));
+                    form12.setTitle(raund2.get(1) + " за 100");
                     form12.show();
                     jButton3.setVisible(false);
                 }
             });
             jButton4.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(1) + " 200");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(1), 200));
+                    form12.setTitle(raund2.get(1) + " за 200");
                     form12.show();
                     jButton4.setVisible(false);
                 }
             });
             jButton5.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(1) + " 300");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(1), 300));
+                    form12.setTitle(raund2.get(1) + " за 300");
                     form12.show();
                     jButton5.setVisible(false);
                 }
             });
             jButton6.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(1) + " 400");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(1), 400));
+                    form12.setTitle(raund2.get(1) + " за 400");
                     form12.show();
                     jButton6.setVisible(false);
                 }
             });
             jButton12.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(1) + " 500");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(1), 500));
+                    form12.setTitle(raund2.get(1) + " за 500");
+                    form12.show();
+                    jButton12.setVisible(false);
+                }
+            });
+        }
+        if (raund2.size() == 3) {
+            jLabel6.setText(raund2.get(0));
+            jLabel8.setText(raund2.get(1));
+            jLabel7.setText(raund2.get(2));
+            ryad4(false);
+            ryad5(false);
+            jButton8.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 100));
+                    form12.setTitle(raund2.get(0) + " за 100");
+                    form12.show();
+                    jButton8.setVisible(false);
+                }
+            });
+            jButton9.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 200));
+                    form12.setTitle(raund2.get(0) + " за 200");
+                    form12.show();
+                    jButton9.setVisible(false);
+                }
+            });
+            jButton10.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 300));
+                    form12.setTitle(raund2.get(0) + " за 300");
+                    form12.show();
+                    jButton10.setVisible(false);
+                }
+            });
+            jButton11.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 400));
+                    form12.setTitle(raund2.get(0) + " за 400");
+                    form12.show();
+                    jButton11.setVisible(false);
+                }
+            });
+            jButton7.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 500));
+                    form12.setTitle(raund2.get(0) + " за 500");
+                    form12.show();
+                    jButton7.setVisible(false);
+                }
+            });
+            jButton3.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(1), 100));
+                    form12.setTitle(raund2.get(1) + " за 100");
+                    form12.show();
+                    jButton3.setVisible(false);
+                }
+            });
+            jButton4.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(1), 200));
+                    form12.setTitle(raund2.get(1) + " за 200");
+                    form12.show();
+                    jButton4.setVisible(false);
+                }
+            });
+            jButton5.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(1), 300));
+                    form12.setTitle(raund2.get(1) + " за 300");
+                    form12.show();
+                    jButton5.setVisible(false);
+                }
+            });
+            jButton6.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(1), 400));
+                    form12.setTitle(raund2.get(1) + " за 400");
+                    form12.show();
+                    jButton6.setVisible(false);
+                }
+            });
+            jButton12.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(1), 500));
+                    form12.setTitle(raund2.get(1) + " за 500");
                     form12.show();
                     jButton12.setVisible(false);
                 }
             });
             jButton18.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(2) + " 100");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(2), 100));
+                    form12.setTitle(raund2.get(2) + " за 100");
                     form12.show();
-                    jButton3.setVisible(false);
+                    jButton18.setVisible(false);
                 }
             });
             jButton14.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(2) + " 200");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(2), 200));
+                    form12.setTitle(raund2.get(2) + " за 200");
                     form12.show();
-                    jButton4.setVisible(false);
+                    jButton14.setVisible(false);
                 }
             });
             jButton23.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(2) + " 300");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(2), 300));
+                    form12.setTitle(raund2.get(2) + " за 300");
                     form12.show();
-                    jButton5.setVisible(false);
+                    jButton23.setVisible(false);
                 }
             });
             jButton16.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(2) + " 400");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(2), 400));
+                    form12.setTitle(raund2.get(2) + " за 400");
                     form12.show();
-                    jButton6.setVisible(false);
+                    jButton16.setVisible(false);
                 }
             });
             jButton17.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(2) + " 500");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(2), 500));
+                    form12.setTitle(raund2.get(2) + " за 500");
+                    form12.show();
+                    jButton17.setVisible(false);
+                }
+            });
+        }
+        if (raund2.size() == 4) {
+            jLabel6.setText(raund2.get(0));
+            jLabel8.setText(raund2.get(1));
+            jLabel7.setText(raund2.get(2));
+            jLabel9.setText(raund2.get(3));
+            ryad5(false);
+            jButton8.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 100));
+                    form12.setTitle(raund2.get(0) + " за 100");
+                    form12.show();
+                    jButton8.setVisible(false);
+                }
+            });
+            jButton9.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 200));
+                    form12.setTitle(raund2.get(0) + " за 200");
+                    form12.show();
+                    jButton9.setVisible(false);
+                }
+            });
+            jButton10.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 300));
+                    form12.setTitle(raund2.get(0) + " за 300");
+                    form12.show();
+                    jButton10.setVisible(false);
+                }
+            });
+            jButton11.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 400));
+                    form12.setTitle(raund2.get(0) + " за 400");
+                    form12.show();
+                    jButton11.setVisible(false);
+                }
+            });
+            jButton7.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 500));
+                    form12.setTitle(raund2.get(0) + " за 500");
+                    form12.show();
+                    jButton7.setVisible(false);
+                }
+            });
+            jButton3.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(1), 100));
+                    form12.setTitle(raund2.get(1) + " за 100");
+                    form12.show();
+                    jButton3.setVisible(false);
+                }
+            });
+            jButton4.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(1), 200));
+                    form12.setTitle(raund2.get(1) + " за 200");
+                    form12.show();
+                    jButton4.setVisible(false);
+                }
+            });
+            jButton5.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(1), 300));
+                    form12.setTitle(raund2.get(1) + " за 300");
+                    form12.show();
+                    jButton5.setVisible(false);
+                }
+            });
+            jButton6.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(1), 400));
+                    form12.setTitle(raund2.get(1) + " за 400");
+                    form12.show();
+                    jButton6.setVisible(false);
+                }
+            });
+            jButton12.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(1), 500));
+                    form12.setTitle(raund2.get(1) + " за 500");
                     form12.show();
                     jButton12.setVisible(false);
+                }
+            });
+            jButton18.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(2), 100));
+                    form12.setTitle(raund2.get(2) + " за 100");
+                    form12.show();
+                    jButton18.setVisible(false);
+                }
+            });
+            jButton14.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(2), 200));
+                    form12.setTitle(raund2.get(2) + " за 200");
+                    form12.show();
+                    jButton14.setVisible(false);
+                }
+            });
+            jButton23.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(2), 300));
+                    form12.setTitle(raund2.get(2) + " за 300");
+                    form12.show();
+                    jButton23.setVisible(false);
+                }
+            });
+            jButton16.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(2), 400));
+                    form12.setTitle(raund2.get(2) + " за 400");
+                    form12.show();
+                    jButton16.setVisible(false);
+                }
+            });
+            jButton17.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(2), 500));
+                    form12.setTitle(raund2.get(2) + " за 500");
+                    form12.show();
+                    jButton17.setVisible(false);
                 }
             });
             jButton13.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(3) + " 100");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(3), 100));
+                    form12.setTitle(raund2.get(3) + " за 100");
                     form12.show();
-                    jButton3.setVisible(false);
+                    jButton13.setVisible(false);
                 }
             });
             jButton20.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(3) + " 200");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(3), 200));
+                    form12.setTitle(raund2.get(3) + " за 200");
                     form12.show();
-                    jButton4.setVisible(false);
+                    jButton20.setVisible(false);
                 }
             });
             jButton15.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(3) + " 300");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(3), 300));
+                    form12.setTitle(raund2.get(3) + " за 300");
                     form12.show();
-                    jButton5.setVisible(false);
+                    jButton15.setVisible(false);
                 }
             });
             jButton25.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(3) + " 400");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(3), 400));
+                    form12.setTitle(raund2.get(3) + " за 400");
                     form12.show();
-                    jButton6.setVisible(false);
+                    jButton25.setVisible(false);
                 }
             });
             jButton26.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(3) + " 500");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(3), 500));
+                    form12.setTitle(raund2.get(3) + " за 500");
                     form12.show();
-                    jButton12.setVisible(false);
+                    jButton26.setVisible(false);
                 }
             });
-            jButton19.addActionListener(new ActionListener() {
+        }
+        if (raund2.size() == 5) {
+            jLabel6.setText(raund2.get(0));
+            jLabel8.setText(raund2.get(1));
+            jLabel7.setText(raund2.get(2));
+            jLabel9.setText(raund2.get(3));
+            jLabel10.setText(raund2.get(4));
+            jButton8.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(4) + " 100");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 100));
+                    form12.setTitle(raund2.get(0) + " за 100");
+                    form12.show();
+                    jButton8.setVisible(false);
+                }
+            });
+            jButton9.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 200));
+                    form12.setTitle(raund2.get(0) + " за 200");
+                    form12.show();
+                    jButton9.setVisible(false);
+                }
+            });
+            jButton10.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 300));
+                    form12.setTitle(raund2.get(0) + " за 300");
+                    form12.show();
+                    jButton10.setVisible(false);
+                }
+            });
+            jButton11.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 400));
+                    form12.setTitle(raund2.get(0) + " за 400");
+                    form12.show();
+                    jButton11.setVisible(false);
+                }
+            });
+            jButton7.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 500));
+                    form12.setTitle(raund2.get(0) + " за 500");
+                    form12.show();
+                    jButton7.setVisible(false);
+                }
+            });
+            jButton3.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(1), 100));
+                    form12.setTitle(raund2.get(1) + " за 100");
                     form12.show();
                     jButton3.setVisible(false);
                 }
             });
-            jButton21.addActionListener(new ActionListener() {
+            jButton4.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(4) + " 200");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(1), 200));
+                    form12.setTitle(raund2.get(1) + " за 200");
                     form12.show();
                     jButton4.setVisible(false);
                 }
             });
-            jButton22.addActionListener(new ActionListener() {
+            jButton5.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(4) + " 300");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(1), 300));
+                    form12.setTitle(raund2.get(1) + " за 300");
                     form12.show();
                     jButton5.setVisible(false);
                 }
             });
-            jButton24.addActionListener(new ActionListener() {
+            jButton6.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(4) + " 400");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(1), 400));
+                    form12.setTitle(raund2.get(1) + " за 400");
                     form12.show();
                     jButton6.setVisible(false);
                 }
             });
+            jButton12.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(1), 500));
+                    form12.setTitle(raund2.get(1) + " за 500");
+                    form12.show();
+                    jButton12.setVisible(false);
+                }
+            });
+            jButton18.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(2), 100));
+                    form12.setTitle(raund2.get(2) + " за 100");
+                    form12.show();
+                    jButton18.setVisible(false);
+                }
+            });
+            jButton14.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(2), 200));
+                    form12.setTitle(raund2.get(2) + " за 200");
+                    form12.show();
+                    jButton14.setVisible(false);
+                }
+            });
+            jButton23.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(2), 300));
+                    form12.setTitle(raund2.get(2) + " за 300");
+                    form12.show();
+                    jButton23.setVisible(false);
+                }
+            });
+            jButton16.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(2), 400));
+                    form12.setTitle(raund2.get(2) + " за 400");
+                    form12.show();
+                    jButton16.setVisible(false);
+                }
+            });
+            jButton17.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(2), 500));
+                    form12.setTitle(raund2.get(2) + " за 500");
+                    form12.show();
+                    jButton17.setVisible(false);
+                }
+            });
+            jButton13.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(3), 100));
+                    form12.setTitle(raund2.get(3) + " за 100");
+                    form12.show();
+                    jButton13.setVisible(false);
+                }
+            });
+            jButton20.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(3), 200));
+                    form12.setTitle(raund2.get(3) + " за 200");
+                    form12.show();
+                    jButton20.setVisible(false);
+                }
+            });
+            jButton15.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(3), 300));
+                    form12.setTitle(raund2.get(3) + " за 300");
+                    form12.show();
+                    jButton15.setVisible(false);
+                }
+            });
+            jButton25.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(3), 400));
+                    form12.setTitle(raund2.get(3) + " за 400");
+                    form12.show();
+                    jButton25.setVisible(false);
+                }
+            });
+            jButton26.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(3), 500));
+                    form12.setTitle(raund2.get(3) + " за 500");
+                    form12.show();
+                    jButton26.setVisible(false);
+                }
+            });
+            jButton19.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(4), 100));
+                    form12.setTitle(raund2.get(4) + " за 100");
+                    form12.show();
+                    jButton19.setVisible(false);
+                }
+            });
+            jButton21.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(4), 200));
+                    form12.setTitle(raund2.get(4) + " за 200");
+                    form12.show();
+                    jButton21.setVisible(false);
+                }
+            });
+            jButton22.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(4), 300));
+                    form12.setTitle(raund2.get(4) + " за 300");
+                    form12.show();
+                    jButton22.setVisible(false);
+                }
+            });
+            jButton24.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(4), 400));
+                    form12.setTitle(raund2.get(4) + " за 400");
+                    form12.show();
+                    jButton24.setVisible(false);
+                }
+            });
             jButton27.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    question_form form12 = new question_form();
-                    form12.setTitle(raund1.get(4) + " 500");
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(4), 500));
+                    form12.setTitle(raund2.get(4) + " за 500");
+                    form12.show();
+                    jButton27.setVisible(false);
+                }
+            });
+        }
+    }
+    
+    private void nextRaund3()
+    {
+        jLabel16.setText(tep_raund + " з " + kikl_raund);
+        ryad1(true);
+        ryad2(true);
+        ryad3(true);
+        ryad4(true);
+        ryad5(true);
+        //jButton8.removeActionListener(jButton8.getAction());
+        if (raund3.size() == 1) {
+            jLabel6.setText(raund3.get(0));
+            ryad2(false);
+            ryad3(false);
+            ryad4(false);
+            ryad5(false);
+            jButton8.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 100));
+                    form12.setTitle(raund3.get(0) + " за 100");
+                    form12.show();
+                    jButton8.setVisible(false);
+                }
+            });
+            jButton9.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 200));
+                    form12.setTitle(raund3.get(0) + " за 200");
+                    form12.show();
+                    jButton9.setVisible(false);
+                }
+            });
+            jButton10.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 300));
+                    form12.setTitle(raund3.get(0) + " за 300");
+                    form12.show();
+                    jButton10.setVisible(false);
+                }
+            });
+            jButton11.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 400));
+                    form12.setTitle(raund3.get(0) + " за 400");
+                    form12.show();
+                    jButton11.setVisible(false);
+                }
+            });
+            jButton7.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 500));
+                    form12.setTitle(raund3.get(0) + " за 500");
+                    form12.show();
+                    jButton7.setVisible(false);
+                }
+            });
+        }
+        if (raund3.size() == 2) {
+            jLabel6.setText(raund3.get(0));
+            jLabel8.setText(raund3.get(1));
+            ryad3(false);
+            ryad4(false);
+            ryad5(false);
+            jButton8.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 100));
+                    form12.setTitle(raund3.get(0) + " за 100");
+                    form12.show();
+                    jButton8.setVisible(false);
+                }
+            });
+            jButton9.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 200));
+                    form12.setTitle(raund3.get(0) + " за 200");
+                    form12.show();
+                    jButton9.setVisible(false);
+                }
+            });
+            jButton10.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 300));
+                    form12.setTitle(raund3.get(0) + " за 300");
+                    form12.show();
+                    jButton10.setVisible(false);
+                }
+            });
+            jButton11.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 400));
+                    form12.setTitle(raund3.get(0) + " за 400");
+                    form12.show();
+                    jButton11.setVisible(false);
+                }
+            });
+            jButton7.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 500));
+                    form12.setTitle(raund3.get(0) + " за 500");
+                    form12.show();
+                    jButton7.setVisible(false);
+                }
+            });
+            jButton3.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(1), 100));
+                    form12.setTitle(raund3.get(1) + " за 100");
+                    form12.show();
+                    jButton3.setVisible(false);
+                }
+            });
+            jButton4.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(1), 200));
+                    form12.setTitle(raund3.get(1) + " за 200");
+                    form12.show();
+                    jButton4.setVisible(false);
+                }
+            });
+            jButton5.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(1), 300));
+                    form12.setTitle(raund3.get(1) + " за 300");
+                    form12.show();
+                    jButton5.setVisible(false);
+                }
+            });
+            jButton6.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(1), 400));
+                    form12.setTitle(raund3.get(1) + " за 400");
+                    form12.show();
+                    jButton6.setVisible(false);
+                }
+            });
+            jButton12.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(1), 500));
+                    form12.setTitle(raund3.get(1) + " за 500");
                     form12.show();
                     jButton12.setVisible(false);
                 }
             });
         }
-
+        if (raund3.size() == 3) {
+            jLabel6.setText(raund3.get(0));
+            jLabel8.setText(raund3.get(1));
+            jLabel7.setText(raund3.get(2));
+            ryad4(false);
+            ryad5(false);
+            jButton8.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 100));
+                    form12.setTitle(raund3.get(0) + " за 100");
+                    form12.show();
+                    jButton8.setVisible(false);
+                }
+            });
+            jButton9.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 200));
+                    form12.setTitle(raund3.get(0) + " за 200");
+                    form12.show();
+                    jButton9.setVisible(false);
+                }
+            });
+            jButton10.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 300));
+                    form12.setTitle(raund3.get(0) + " за 300");
+                    form12.show();
+                    jButton10.setVisible(false);
+                }
+            });
+            jButton11.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 400));
+                    form12.setTitle(raund3.get(0) + " за 400");
+                    form12.show();
+                    jButton11.setVisible(false);
+                }
+            });
+            jButton7.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 500));
+                    form12.setTitle(raund3.get(0) + " за 500");
+                    form12.show();
+                    jButton7.setVisible(false);
+                }
+            });
+            jButton3.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(1), 100));
+                    form12.setTitle(raund3.get(1) + " за 100");
+                    form12.show();
+                    jButton3.setVisible(false);
+                }
+            });
+            jButton4.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(1), 200));
+                    form12.setTitle(raund3.get(1) + " за 200");
+                    form12.show();
+                    jButton4.setVisible(false);
+                }
+            });
+            jButton5.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(1), 300));
+                    form12.setTitle(raund3.get(1) + " за 300");
+                    form12.show();
+                    jButton5.setVisible(false);
+                }
+            });
+            jButton6.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(1), 400));
+                    form12.setTitle(raund3.get(1) + " за 400");
+                    form12.show();
+                    jButton6.setVisible(false);
+                }
+            });
+            jButton12.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(1), 500));
+                    form12.setTitle(raund3.get(1) + " за 500");
+                    form12.show();
+                    jButton12.setVisible(false);
+                }
+            });
+            jButton18.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(2), 100));
+                    form12.setTitle(raund3.get(2) + " за 100");
+                    form12.show();
+                    jButton18.setVisible(false);
+                }
+            });
+            jButton14.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(2), 200));
+                    form12.setTitle(raund3.get(2) + " за 200");
+                    form12.show();
+                    jButton14.setVisible(false);
+                }
+            });
+            jButton23.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(2), 300));
+                    form12.setTitle(raund3.get(2) + " за 300");
+                    form12.show();
+                    jButton23.setVisible(false);
+                }
+            });
+            jButton16.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(2), 400));
+                    form12.setTitle(raund3.get(2) + " за 400");
+                    form12.show();
+                    jButton16.setVisible(false);
+                }
+            });
+            jButton17.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(2), 500));
+                    form12.setTitle(raund3.get(2) + " за 500");
+                    form12.show();
+                    jButton17.setVisible(false);
+                }
+            });
+        }
+        if (raund3.size() == 4) {
+            jLabel6.setText(raund3.get(0));
+            jLabel8.setText(raund3.get(1));
+            jLabel7.setText(raund3.get(2));
+            jLabel9.setText(raund3.get(3));
+            ryad5(false);
+            jButton8.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 100));
+                    form12.setTitle(raund3.get(0) + " за 100");
+                    form12.show();
+                    jButton8.setVisible(false);
+                }
+            });
+            jButton9.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 200));
+                    form12.setTitle(raund3.get(0) + " за 200");
+                    form12.show();
+                    jButton9.setVisible(false);
+                }
+            });
+            jButton10.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 300));
+                    form12.setTitle(raund3.get(0) + " за 300");
+                    form12.show();
+                    jButton10.setVisible(false);
+                }
+            });
+            jButton11.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 400));
+                    form12.setTitle(raund3.get(0) + " за 400");
+                    form12.show();
+                    jButton11.setVisible(false);
+                }
+            });
+            jButton7.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 500));
+                    form12.setTitle(raund3.get(0) + " за 500");
+                    form12.show();
+                    jButton7.setVisible(false);
+                }
+            });
+            jButton3.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(1), 100));
+                    form12.setTitle(raund3.get(1) + " за 100");
+                    form12.show();
+                    jButton3.setVisible(false);
+                }
+            });
+            jButton4.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(1), 200));
+                    form12.setTitle(raund3.get(1) + " за 200");
+                    form12.show();
+                    jButton4.setVisible(false);
+                }
+            });
+            jButton5.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(1), 300));
+                    form12.setTitle(raund3.get(1) + " за 300");
+                    form12.show();
+                    jButton5.setVisible(false);
+                }
+            });
+            jButton6.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(1), 400));
+                    form12.setTitle(raund3.get(1) + " за 400");
+                    form12.show();
+                    jButton6.setVisible(false);
+                }
+            });
+            jButton12.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(1), 500));
+                    form12.setTitle(raund3.get(1) + " за 500");
+                    form12.show();
+                    jButton12.setVisible(false);
+                }
+            });
+            jButton18.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(2), 100));
+                    form12.setTitle(raund3.get(2) + " за 100");
+                    form12.show();
+                    jButton18.setVisible(false);
+                }
+            });
+            jButton14.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(2), 200));
+                    form12.setTitle(raund3.get(2) + " за 200");
+                    form12.show();
+                    jButton14.setVisible(false);
+                }
+            });
+            jButton23.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(2), 300));
+                    form12.setTitle(raund3.get(2) + " за 300");
+                    form12.show();
+                    jButton23.setVisible(false);
+                }
+            });
+            jButton16.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(2), 400));
+                    form12.setTitle(raund3.get(2) + " за 400");
+                    form12.show();
+                    jButton16.setVisible(false);
+                }
+            });
+            jButton17.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(2), 500));
+                    form12.setTitle(raund3.get(2) + " за 500");
+                    form12.show();
+                    jButton17.setVisible(false);
+                }
+            });
+            jButton13.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(3), 100));
+                    form12.setTitle(raund3.get(3) + " за 100");
+                    form12.show();
+                    jButton13.setVisible(false);
+                }
+            });
+            jButton20.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(3), 200));
+                    form12.setTitle(raund3.get(3) + " за 200");
+                    form12.show();
+                    jButton20.setVisible(false);
+                }
+            });
+            jButton15.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(3), 300));
+                    form12.setTitle(raund3.get(3) + " за 300");
+                    form12.show();
+                    jButton15.setVisible(false);
+                }
+            });
+            jButton25.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(3), 400));
+                    form12.setTitle(raund3.get(3) + " за 400");
+                    form12.show();
+                    jButton25.setVisible(false);
+                }
+            });
+            jButton26.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(3), 500));
+                    form12.setTitle(raund3.get(3) + " за 500");
+                    form12.show();
+                    jButton26.setVisible(false);
+                }
+            });
+        }
+        if (raund3.size() == 5) {
+            jLabel6.setText(raund3.get(0));
+            jLabel8.setText(raund3.get(1));
+            jLabel7.setText(raund3.get(2));
+            jLabel9.setText(raund3.get(3));
+            jLabel10.setText(raund3.get(4));
+            jButton8.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 100));
+                    form12.setTitle(raund3.get(0) + " за 100");
+                    form12.show();
+                    jButton8.setVisible(false);
+                }
+            });
+            jButton9.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 200));
+                    form12.setTitle(raund3.get(0) + " за 200");
+                    form12.show();
+                    jButton9.setVisible(false);
+                }
+            });
+            jButton10.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 300));
+                    form12.setTitle(raund3.get(0) + " за 300");
+                    form12.show();
+                    jButton10.setVisible(false);
+                }
+            });
+            jButton11.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 400));
+                    form12.setTitle(raund3.get(0) + " за 400");
+                    form12.show();
+                    jButton11.setVisible(false);
+                }
+            });
+            jButton7.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 500));
+                    form12.setTitle(raund3.get(0) + " за 500");
+                    form12.show();
+                    jButton7.setVisible(false);
+                }
+            });
+            jButton3.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(1), 100));
+                    form12.setTitle(raund3.get(1) + " за 100");
+                    form12.show();
+                    jButton3.setVisible(false);
+                }
+            });
+            jButton4.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(1), 200));
+                    form12.setTitle(raund3.get(1) + " за 200");
+                    form12.show();
+                    jButton4.setVisible(false);
+                }
+            });
+            jButton5.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(1), 300));
+                    form12.setTitle(raund3.get(1) + " за 300");
+                    form12.show();
+                    jButton5.setVisible(false);
+                }
+            });
+            jButton6.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(1), 400));
+                    form12.setTitle(raund3.get(1) + " за 400");
+                    form12.show();
+                    jButton6.setVisible(false);
+                }
+            });
+            jButton12.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(1), 500));
+                    form12.setTitle(raund3.get(1) + " за 500");
+                    form12.show();
+                    jButton12.setVisible(false);
+                }
+            });
+            jButton18.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(2), 100));
+                    form12.setTitle(raund3.get(2) + " за 100");
+                    form12.show();
+                    jButton18.setVisible(false);
+                }
+            });
+            jButton14.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(2), 200));
+                    form12.setTitle(raund3.get(2) + " за 200");
+                    form12.show();
+                    jButton14.setVisible(false);
+                }
+            });
+            jButton23.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(2), 300));
+                    form12.setTitle(raund3.get(2) + " за 300");
+                    form12.show();
+                    jButton23.setVisible(false);
+                }
+            });
+            jButton16.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(2), 400));
+                    form12.setTitle(raund3.get(2) + " за 400");
+                    form12.show();
+                    jButton16.setVisible(false);
+                }
+            });
+            jButton17.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(2), 500));
+                    form12.setTitle(raund3.get(2) + " за 500");
+                    form12.show();
+                    jButton17.setVisible(false);
+                }
+            });
+            jButton13.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(3), 100));
+                    form12.setTitle(raund3.get(3) + " за 100");
+                    form12.show();
+                    jButton13.setVisible(false);
+                }
+            });
+            jButton20.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(3), 200));
+                    form12.setTitle(raund3.get(3) + " за 200");
+                    form12.show();
+                    jButton20.setVisible(false);
+                }
+            });
+            jButton15.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(3), 300));
+                    form12.setTitle(raund3.get(3) + " за 300");
+                    form12.show();
+                    jButton15.setVisible(false);
+                }
+            });
+            jButton25.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(3), 400));
+                    form12.setTitle(raund3.get(3) + " за 400");
+                    form12.show();
+                    jButton25.setVisible(false);
+                }
+            });
+            jButton26.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(3), 500));
+                    form12.setTitle(raund3.get(3) + " за 500");
+                    form12.show();
+                    jButton26.setVisible(false);
+                }
+            });
+            jButton19.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(4), 100));
+                    form12.setTitle(raund3.get(4) + " за 100");
+                    form12.show();
+                    jButton19.setVisible(false);
+                }
+            });
+            jButton21.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(4), 200));
+                    form12.setTitle(raund3.get(4) + " за 200");
+                    form12.show();
+                    jButton21.setVisible(false);
+                }
+            });
+            jButton22.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(4), 300));
+                    form12.setTitle(raund3.get(4) + " за 300");
+                    form12.show();
+                    jButton22.setVisible(false);
+                }
+            });
+            jButton24.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(4), 400));
+                    form12.setTitle(raund3.get(4) + " за 400");
+                    form12.show();
+                    jButton24.setVisible(false);
+                }
+            });
+            jButton27.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(4), 500));
+                    form12.setTitle(raund3.get(4) + " за 500");
+                    form12.show();
+                    jButton27.setVisible(false);
+                }
+            });
+        }
     }
 
+    private void nextRaund4()
+    {
+        jLabel16.setText(tep_raund + " з " + kikl_raund);
+        ryad1(true);
+        ryad2(true);
+        ryad3(true);
+        ryad4(true);
+        ryad5(true);
+        //jButton8.removeActionListener(jButton8.getAction());
+        if (raund4.size() == 1) {
+            jLabel6.setText(raund4.get(0));
+            ryad2(false);
+            ryad3(false);
+            ryad4(false);
+            ryad5(false);
+            jButton8.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 100));
+                    form12.setTitle(raund4.get(0) + " за 100");
+                    form12.show();
+                    jButton8.setVisible(false);
+                }
+            });
+            jButton9.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 200));
+                    form12.setTitle(raund4.get(0) + " за 200");
+                    form12.show();
+                    jButton9.setVisible(false);
+                }
+            });
+            jButton10.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 300));
+                    form12.setTitle(raund4.get(0) + " за 300");
+                    form12.show();
+                    jButton10.setVisible(false);
+                }
+            });
+            jButton11.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 400));
+                    form12.setTitle(raund4.get(0) + " за 400");
+                    form12.show();
+                    jButton11.setVisible(false);
+                }
+            });
+            jButton7.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 500));
+                    form12.setTitle(raund4.get(0) + " за 500");
+                    form12.show();
+                    jButton7.setVisible(false);
+                }
+            });
+        }
+        if (raund4.size() == 2) {
+            jLabel6.setText(raund4.get(0));
+            jLabel8.setText(raund4.get(1));
+            ryad3(false);
+            ryad4(false);
+            ryad5(false);
+            jButton8.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 100));
+                    form12.setTitle(raund4.get(0) + " за 100");
+                    form12.show();
+                    jButton8.setVisible(false);
+                }
+            });
+            jButton9.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 200));
+                    form12.setTitle(raund4.get(0) + " за 200");
+                    form12.show();
+                    jButton9.setVisible(false);
+                }
+            });
+            jButton10.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 300));
+                    form12.setTitle(raund4.get(0) + " за 300");
+                    form12.show();
+                    jButton10.setVisible(false);
+                }
+            });
+            jButton11.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 400));
+                    form12.setTitle(raund4.get(0) + " за 400");
+                    form12.show();
+                    jButton11.setVisible(false);
+                }
+            });
+            jButton7.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 500));
+                    form12.setTitle(raund4.get(0) + " за 500");
+                    form12.show();
+                    jButton7.setVisible(false);
+                }
+            });
+            jButton3.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(1), 100));
+                    form12.setTitle(raund4.get(1) + " за 100");
+                    form12.show();
+                    jButton3.setVisible(false);
+                }
+            });
+            jButton4.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(1), 200));
+                    form12.setTitle(raund4.get(1) + " за 200");
+                    form12.show();
+                    jButton4.setVisible(false);
+                }
+            });
+            jButton5.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(1), 300));
+                    form12.setTitle(raund4.get(1) + " за 300");
+                    form12.show();
+                    jButton5.setVisible(false);
+                }
+            });
+            jButton6.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(1), 400));
+                    form12.setTitle(raund4.get(1) + " за 400");
+                    form12.show();
+                    jButton6.setVisible(false);
+                }
+            });
+            jButton12.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(1), 500));
+                    form12.setTitle(raund4.get(1) + " за 500");
+                    form12.show();
+                    jButton12.setVisible(false);
+                }
+            });
+        }
+        if (raund4.size() == 3) {
+            jLabel6.setText(raund4.get(0));
+            jLabel8.setText(raund4.get(1));
+            jLabel7.setText(raund4.get(2));
+            ryad4(false);
+            ryad5(false);
+            jButton8.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 100));
+                    form12.setTitle(raund4.get(0) + " за 100");
+                    form12.show();
+                    jButton8.setVisible(false);
+                }
+            });
+            jButton9.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 200));
+                    form12.setTitle(raund4.get(0) + " за 200");
+                    form12.show();
+                    jButton9.setVisible(false);
+                }
+            });
+            jButton10.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 300));
+                    form12.setTitle(raund4.get(0) + " за 300");
+                    form12.show();
+                    jButton10.setVisible(false);
+                }
+            });
+            jButton11.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 400));
+                    form12.setTitle(raund4.get(0) + " за 400");
+                    form12.show();
+                    jButton11.setVisible(false);
+                }
+            });
+            jButton7.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 500));
+                    form12.setTitle(raund4.get(0) + " за 500");
+                    form12.show();
+                    jButton7.setVisible(false);
+                }
+            });
+            jButton3.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(1), 100));
+                    form12.setTitle(raund4.get(1) + " за 100");
+                    form12.show();
+                    jButton3.setVisible(false);
+                }
+            });
+            jButton4.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(1), 200));
+                    form12.setTitle(raund4.get(1) + " за 200");
+                    form12.show();
+                    jButton4.setVisible(false);
+                }
+            });
+            jButton5.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(1), 300));
+                    form12.setTitle(raund4.get(1) + " за 300");
+                    form12.show();
+                    jButton5.setVisible(false);
+                }
+            });
+            jButton6.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(1), 400));
+                    form12.setTitle(raund4.get(1) + " за 400");
+                    form12.show();
+                    jButton6.setVisible(false);
+                }
+            });
+            jButton12.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(1), 500));
+                    form12.setTitle(raund4.get(1) + " за 500");
+                    form12.show();
+                    jButton12.setVisible(false);
+                }
+            });
+            jButton18.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(2), 100));
+                    form12.setTitle(raund4.get(2) + " за 100");
+                    form12.show();
+                    jButton18.setVisible(false);
+                }
+            });
+            jButton14.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(2), 200));
+                    form12.setTitle(raund4.get(2) + " за 200");
+                    form12.show();
+                    jButton14.setVisible(false);
+                }
+            });
+            jButton23.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(2), 300));
+                    form12.setTitle(raund4.get(2) + " за 300");
+                    form12.show();
+                    jButton23.setVisible(false);
+                }
+            });
+            jButton16.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(2), 400));
+                    form12.setTitle(raund4.get(2) + " за 400");
+                    form12.show();
+                    jButton16.setVisible(false);
+                }
+            });
+            jButton17.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(2), 500));
+                    form12.setTitle(raund4.get(2) + " за 500");
+                    form12.show();
+                    jButton17.setVisible(false);
+                }
+            });
+        }
+        if (raund4.size() == 4) {
+            jLabel6.setText(raund4.get(0));
+            jLabel8.setText(raund4.get(1));
+            jLabel7.setText(raund4.get(2));
+            jLabel9.setText(raund4.get(3));
+            ryad5(false);
+            jButton8.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 100));
+                    form12.setTitle(raund4.get(0) + " за 100");
+                    form12.show();
+                    jButton8.setVisible(false);
+                }
+            });
+            jButton9.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 200));
+                    form12.setTitle(raund4.get(0) + " за 200");
+                    form12.show();
+                    jButton9.setVisible(false);
+                }
+            });
+            jButton10.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 300));
+                    form12.setTitle(raund4.get(0) + " за 300");
+                    form12.show();
+                    jButton10.setVisible(false);
+                }
+            });
+            jButton11.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 400));
+                    form12.setTitle(raund4.get(0) + " за 400");
+                    form12.show();
+                    jButton11.setVisible(false);
+                }
+            });
+            jButton7.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 500));
+                    form12.setTitle(raund4.get(0) + " за 500");
+                    form12.show();
+                    jButton7.setVisible(false);
+                }
+            });
+            jButton3.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(1), 100));
+                    form12.setTitle(raund4.get(1) + " за 100");
+                    form12.show();
+                    jButton3.setVisible(false);
+                }
+            });
+            jButton4.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(1), 200));
+                    form12.setTitle(raund4.get(1) + " за 200");
+                    form12.show();
+                    jButton4.setVisible(false);
+                }
+            });
+            jButton5.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(1), 300));
+                    form12.setTitle(raund4.get(1) + " за 300");
+                    form12.show();
+                    jButton5.setVisible(false);
+                }
+            });
+            jButton6.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(1), 400));
+                    form12.setTitle(raund4.get(1) + " за 400");
+                    form12.show();
+                    jButton6.setVisible(false);
+                }
+            });
+            jButton12.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(1), 500));
+                    form12.setTitle(raund4.get(1) + " за 500");
+                    form12.show();
+                    jButton12.setVisible(false);
+                }
+            });
+            jButton18.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(2), 100));
+                    form12.setTitle(raund4.get(2) + " за 100");
+                    form12.show();
+                    jButton18.setVisible(false);
+                }
+            });
+            jButton14.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(2), 200));
+                    form12.setTitle(raund4.get(2) + " за 200");
+                    form12.show();
+                    jButton14.setVisible(false);
+                }
+            });
+            jButton23.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(2), 300));
+                    form12.setTitle(raund4.get(2) + " за 300");
+                    form12.show();
+                    jButton23.setVisible(false);
+                }
+            });
+            jButton16.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(2), 400));
+                    form12.setTitle(raund4.get(2) + " за 400");
+                    form12.show();
+                    jButton16.setVisible(false);
+                }
+            });
+            jButton17.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(2), 500));
+                    form12.setTitle(raund4.get(2) + " за 500");
+                    form12.show();
+                    jButton17.setVisible(false);
+                }
+            });
+            jButton13.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(3), 100));
+                    form12.setTitle(raund4.get(3) + " за 100");
+                    form12.show();
+                    jButton13.setVisible(false);
+                }
+            });
+            jButton20.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(3), 200));
+                    form12.setTitle(raund4.get(3) + " за 200");
+                    form12.show();
+                    jButton20.setVisible(false);
+                }
+            });
+            jButton15.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(3), 300));
+                    form12.setTitle(raund4.get(3) + " за 300");
+                    form12.show();
+                    jButton15.setVisible(false);
+                }
+            });
+            jButton25.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(3), 400));
+                    form12.setTitle(raund4.get(3) + " за 400");
+                    form12.show();
+                    jButton25.setVisible(false);
+                }
+            });
+            jButton26.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(3), 500));
+                    form12.setTitle(raund4.get(3) + " за 500");
+                    form12.show();
+                    jButton26.setVisible(false);
+                }
+            });
+        }
+        if (raund4.size() == 5) {
+            jLabel6.setText(raund4.get(0));
+            jLabel8.setText(raund4.get(1));
+            jLabel7.setText(raund4.get(2));
+            jLabel9.setText(raund4.get(3));
+            jLabel10.setText(raund4.get(4));
+            jButton8.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 100));
+                    form12.setTitle(raund4.get(0) + " за 100");
+                    form12.show();
+                    jButton8.setVisible(false);
+                }
+            });
+            jButton9.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 200));
+                    form12.setTitle(raund4.get(0) + " за 200");
+                    form12.show();
+                    jButton9.setVisible(false);
+                }
+            });
+            jButton10.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 300));
+                    form12.setTitle(raund4.get(0) + " за 300");
+                    form12.show();
+                    jButton10.setVisible(false);
+                }
+            });
+            jButton11.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 400));
+                    form12.setTitle(raund4.get(0) + " за 400");
+                    form12.show();
+                    jButton11.setVisible(false);
+                }
+            });
+            jButton7.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 500));
+                    form12.setTitle(raund4.get(0) + " за 500");
+                    form12.show();
+                    jButton7.setVisible(false);
+                }
+            });
+            jButton3.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(1), 100));
+                    form12.setTitle(raund4.get(1) + " за 100");
+                    form12.show();
+                    jButton3.setVisible(false);
+                }
+            });
+            jButton4.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(1), 200));
+                    form12.setTitle(raund4.get(1) + " за 200");
+                    form12.show();
+                    jButton4.setVisible(false);
+                }
+            });
+            jButton5.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(1), 300));
+                    form12.setTitle(raund4.get(1) + " за 300");
+                    form12.show();
+                    jButton5.setVisible(false);
+                }
+            });
+            jButton6.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(1), 400));
+                    form12.setTitle(raund4.get(1) + " за 400");
+                    form12.show();
+                    jButton6.setVisible(false);
+                }
+            });
+            jButton12.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(1), 500));
+                    form12.setTitle(raund4.get(1) + " за 500");
+                    form12.show();
+                    jButton12.setVisible(false);
+                }
+            });
+            jButton18.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(2), 100));
+                    form12.setTitle(raund4.get(2) + " за 100");
+                    form12.show();
+                    jButton18.setVisible(false);
+                }
+            });
+            jButton14.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(2), 200));
+                    form12.setTitle(raund4.get(2) + " за 200");
+                    form12.show();
+                    jButton14.setVisible(false);
+                }
+            });
+            jButton23.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(2), 300));
+                    form12.setTitle(raund4.get(2) + " за 300");
+                    form12.show();
+                    jButton23.setVisible(false);
+                }
+            });
+            jButton16.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(2), 400));
+                    form12.setTitle(raund4.get(2) + " за 400");
+                    form12.show();
+                    jButton16.setVisible(false);
+                }
+            });
+            jButton17.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(2), 500));
+                    form12.setTitle(raund4.get(2) + " за 500");
+                    form12.show();
+                    jButton17.setVisible(false);
+                }
+            });
+            jButton13.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(3), 100));
+                    form12.setTitle(raund4.get(3) + " за 100");
+                    form12.show();
+                    jButton13.setVisible(false);
+                }
+            });
+            jButton20.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(3), 200));
+                    form12.setTitle(raund4.get(3) + " за 200");
+                    form12.show();
+                    jButton20.setVisible(false);
+                }
+            });
+            jButton15.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(3), 300));
+                    form12.setTitle(raund4.get(3) + " за 300");
+                    form12.show();
+                    jButton15.setVisible(false);
+                }
+            });
+            jButton25.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(3), 400));
+                    form12.setTitle(raund4.get(3) + " за 400");
+                    form12.show();
+                    jButton25.setVisible(false);
+                }
+            });
+            jButton26.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(3), 500));
+                    form12.setTitle(raund4.get(3) + " за 500");
+                    form12.show();
+                    jButton26.setVisible(false);
+                }
+            });
+            jButton19.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(4), 100));
+                    form12.setTitle(raund4.get(4) + " за 100");
+                    form12.show();
+                    jButton19.setVisible(false);
+                }
+            });
+            jButton21.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(4), 200));
+                    form12.setTitle(raund4.get(4) + " за 200");
+                    form12.show();
+                    jButton21.setVisible(false);
+                }
+            });
+            jButton22.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(4), 300));
+                    form12.setTitle(raund4.get(4) + " за 300");
+                    form12.show();
+                    jButton22.setVisible(false);
+                }
+            });
+            jButton24.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(4), 400));
+                    form12.setTitle(raund4.get(4) + " за 400");
+                    form12.show();
+                    jButton24.setVisible(false);
+                }
+            });
+            jButton27.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(4), 500));
+                    form12.setTitle(raund4.get(4) + " за 500");
+                    form12.show();
+                    jButton27.setVisible(false);
+                }
+            });
+        }
+    }
+    
     private void ryad1(boolean a) {
         jLabel6.setVisible(a);
         jButton8.setVisible(a);
@@ -913,11 +2984,6 @@ public class game_proc extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -952,6 +3018,8 @@ public class game_proc extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 153, 255));
+        setForeground(new java.awt.Color(51, 153, 255));
 
         jLabel1.setText("Назва паку:");
 
@@ -1023,16 +3091,6 @@ public class game_proc extends javax.swing.JFrame {
 
         jLabel23.setText("jLabel23");
 
-        jLabel24.setText("Гравець №2");
-
-        jLabel25.setText("jLabel25");
-
-        jLabel26.setText("jLabel26");
-
-        jLabel27.setText("Кількість балів:");
-
-        jLabel32.setText("jLabel32");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1047,37 +3105,20 @@ public class game_proc extends javax.swing.JFrame {
                         .addComponent(jLabel22)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel23)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel24)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel27)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel32))
-                    .addComponent(jLabel26)
-                    .addComponent(jLabel25))
-                .addGap(167, 167, 167))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel24))
+                .addComponent(jLabel19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20)
-                    .addComponent(jLabel25))
+                .addComponent(jLabel20)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21)
-                    .addComponent(jLabel26))
+                .addComponent(jLabel21)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
-                    .addComponent(jLabel23)
-                    .addComponent(jLabel27)
-                    .addComponent(jLabel32))
+                    .addComponent(jLabel23))
                 .addGap(0, 26, Short.MAX_VALUE))
         );
 
@@ -1325,6 +3366,69 @@ public class game_proc extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(38, 38, 38))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(27, 27, 27)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jButton20, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(27, 27, 27)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(27, 27, 27)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel16)))
+                        .addGap(91, 91, 91))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1332,75 +3436,8 @@ public class game_proc extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(28, 28, 28))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(27, 27, 27)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(203, 203, 203)
-                                        .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(27, 27, 27)
-                                        .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jButton20, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(26, 26, 26)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(27, 27, 27))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(27, 27, 27)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel16)))
-                        .addGap(19, 19, 19)))
-                .addContainerGap())
+                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1431,12 +3468,12 @@ public class game_proc extends javax.swing.JFrame {
                         .addGap(1, 1, 1)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1454,12 +3491,12 @@ public class game_proc extends javax.swing.JFrame {
                     .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
@@ -1602,12 +3639,7 @@ public class game_proc extends javax.swing.JFrame {
     public javax.swing.JLabel jLabel21;
     public javax.swing.JLabel jLabel22;
     public javax.swing.JLabel jLabel23;
-    public javax.swing.JLabel jLabel24;
-    public javax.swing.JLabel jLabel25;
-    public javax.swing.JLabel jLabel26;
-    public javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
-    public javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

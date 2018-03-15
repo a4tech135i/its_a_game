@@ -13,23 +13,36 @@ import java.util.ArrayList;
  */
 public class Game_pack_theme {
 
-    String thems;
+    String error="";
+    String them;
+    Pack pack;
     Question questionsBy100;
     Question questionsBy200;
     Question questionsBy300;
     Question questionsBy400;
     Question questionsBy500;
 
-    public Game_pack_theme(String thems) {
-        this.thems = thems;
+    public Game_pack_theme(String them, Pack pack) {
+        this.them = them;
+        this.pack=pack;
     }
 
-    public void getStateByTheme(Pack pack) {
-        questionsBy100 = pack.getQuestionByThemeAndValue(thems, 100);
-        questionsBy200 = pack.getQuestionByThemeAndValue(thems, 200);
-        questionsBy300 = pack.getQuestionByThemeAndValue(thems, 300);
-        questionsBy400 = pack.getQuestionByThemeAndValue(thems, 400);
-        questionsBy500 = pack.getQuestionByThemeAndValue(thems, 500);
+    public void getStateByTheme() {
+        questionsBy100 = pack.getQuestionByThemeAndValue(them, 100);
+        questionsBy200 = pack.getQuestionByThemeAndValue(them, 200);
+        questionsBy300 = pack.getQuestionByThemeAndValue(them, 300);
+        questionsBy400 = pack.getQuestionByThemeAndValue(them, 400);
+        questionsBy500 = pack.getQuestionByThemeAndValue(them, 500);
+    }
+
+    public String getError()
+    {
+        if(questionsBy100==null) error+="По темі " + them + " немає питання за 100 балів\n";
+        if(questionsBy200==null) error+="По темі " + them + " немає питання за 200 балів\n";
+        if(questionsBy300==null) error+="По темі " + them + " немає питання за 300 балів\n";
+        if(questionsBy400==null) error+="По темі " + them + " немає питання за 400 балів\n";
+        if(questionsBy500==null) error+="По темі " + them + " немає питання за 500 балів\n";
+        return error;
     }
 
     public Question getQuestionsBy100() {

@@ -5,18 +5,29 @@
  */
 package Forms;
 
+import static Forms.game_proc.balss;
+import game.Question;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Andriy
  */
 public class question_form extends javax.swing.JFrame {
-
+    Question aaa;
     /**
      * Creates new form question_form
      */
     public question_form() {
         initComponents();
         setLocationRelativeTo(null);
+    }
+    
+    public question_form(Question a) {
+        initComponents();
+        aaa = a;
+        setLocationRelativeTo(null);
+        jLabel1.setText(aaa.getText());
     }
 
     /**
@@ -31,12 +42,20 @@ public class question_form extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("jLabel1");
-
-        jTextField1.setText("jTextField1");
 
         jButton1.setText("Дати відповідь");
         jButton1.setToolTipText("");
@@ -46,27 +65,40 @@ public class question_form extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Питання:");
+
+        jLabel3.setText("Введіть відповідь:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField1)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(40, 40, 40)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(2, 2, 2)
+                .addComponent(jLabel3)
+                .addGap(2, 2, 2)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -74,9 +106,58 @@ public class question_form extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        game_proc.balss += 100;
-        this.hide();
+        String ans = jTextField1.getText().toLowerCase();
+        if(aaa.getAnswer().toLowerCase().equals(ans))
+        {
+            game_proc.balss += aaa.getValue();
+            JOptionPane.showMessageDialog(null, "Ви відповіли вірно!");
+            this.hide();
+            if(game_proc.yksho_1_raund)
+            {
+                JOptionPane.showMessageDialog(null, "Кількість набраних балів = " + balss+ "\nПак закінчився!");
+                //game_proc.yksho_1_raund=false;
+                game_proc.client.sendMessage("vidpovid-"+game_proc.balss);
+                return;
+            }
+            if(game_proc.lll)
+            {
+                JOptionPane.showMessageDialog(null, "Раунд "+game_proc.tep_raund+"!");
+                game_proc.lll = false;
+            }
+        }
+        else
+        {
+            game_proc.balss -= aaa.getValue();
+            JOptionPane.showMessageDialog(null, "Відповідь неправельна!");
+            this.hide();
+            if(game_proc.yksho_1_raund)
+            {
+                JOptionPane.showMessageDialog(null, "Кількість набраних балів = " + balss+ "\nПак закінчився!");
+                //game_proc.yksho_1_raund=false;
+                game_proc.client.sendMessage("%|"+game_proc.balss);
+                return;
+            }
+            if(game_proc.lll)
+            {
+                JOptionPane.showMessageDialog(null, "Раунд "+game_proc.tep_raund+"!");
+                game_proc.lll = false;
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        if(game_proc.yksho_1_raund)
+        {
+            JOptionPane.showMessageDialog(null, "Кількість набраних балів = " + balss+ "\nПак закінчився!");
+        }
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if(game_proc.yksho_1_raund)
+        {
+            JOptionPane.showMessageDialog(null, "Кількість набраних балів = " + balss+ "\nПак закінчився!");
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -116,6 +197,8 @@ public class question_form extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
