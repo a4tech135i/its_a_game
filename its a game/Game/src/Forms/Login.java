@@ -24,9 +24,9 @@ public class Login extends javax.swing.JFrame {
     public static Connection con;
     public static Statement stmt;
     public static ResultSet rs;
-    private static final String url = "jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11225345?useUnicode=yes&characterEncoding=UTF-8";
-    private static final String user = "sql11225345";
-    private static final String password = "PhiZHGwtgQ";
+    private static final String url = "jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11226779?useUnicode=yes&characterEncoding=UTF-8";
+    private static final String user = "sql11226779";
+    private static final String password = "liW4kYtnFr";
     ArrayList<user1> list_user = new ArrayList<>();
     /**
      * Creates new form Login

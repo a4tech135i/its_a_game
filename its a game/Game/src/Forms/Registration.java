@@ -20,9 +20,9 @@ import javax.swing.JOptionPane;
  */
 public class Registration extends javax.swing.JFrame {
     public static Connection con;
-    private static final String url = "jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11225345?useUnicode=yes&characterEncoding=UTF-8";
-    private static final String user = "sql11225345";
-    private static final String password = "PhiZHGwtgQ";
+    private static final String url = "jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11226779?useUnicode=yes&characterEncoding=UTF-8";
+    private static final String user = "sql11226779";
+    private static final String password = "liW4kYtnFr";
     /**
      * Creates new form Registration
      */

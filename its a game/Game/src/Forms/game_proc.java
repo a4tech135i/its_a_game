@@ -10,6 +10,8 @@ import game.Pack;
 import game.user1;
 import game.userss;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,6 +21,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,65 +30,65 @@ import javax.swing.table.DefaultTableModel;
  * @author Andriy
  */
 public class game_proc extends javax.swing.JFrame {
+
     String ip;
     Client client;
     private Socket socketConnection;
     ObjectInputStream clientInputStream;
     Pack testTmp;
+    static int balss = 0;
     static public userss wq;
-    public ArrayList<userss> list_user = new ArrayList<>(); 
+    public ArrayList<userss> list_user = new ArrayList<>();
+    public ArrayList<JButton> b7 = new ArrayList<>();
+    public ArrayList<JButton> b8 = new ArrayList<>();
+    public ArrayList<JButton> b9 = new ArrayList<>();
+    public ArrayList<JButton> b10 = new ArrayList<>();
+
     /**
      * Creates new form game_proc
      */
     public game_proc() {
         initComponents();
     }
-    
-    public void setList(ArrayList<userss> u)
-    {
+
+    public void setList(ArrayList<userss> u) {
         list_user = u;
     }
-    
-    public ArrayList<userss> getList()
-    {
+
+    public ArrayList<userss> getList() {
         return list_user;
     }
-    
-    public void startConnection(String ip,String clientName, game_proc gp){
-        client=new Client();
+
+    public void startConnection(String ip, String clientName, game_proc gp) {
+        client = new Client();
         client.setClientName(clientName);
         client.setIp(ip);
         client.setGp(gp);
         client.setOutSource(jTable1);
         client.startClient();
     }
-    
-    public void refresh_interface()
-    {
+
+    public void refresh_interface() {
         int o = list_user.size();
-        if(o == 1)
-        {
+        if (o == 1) {
             jLabel20.setText(list_user.get(0).getLogin());
             jLabel21.setText(list_user.get(0).getName_sur());
             jLabel23.setText(String.valueOf(list_user.get(0).getBals()));
         }
     }
-    
+
     public game_proc(String ip1) {
         initComponents();
         ip = ip1;
-        try
-        {
-            socketConnection = new Socket (ip, 11111);  
-            clientInputStream=new ObjectInputStream(socketConnection.getInputStream());
-            testTmp=(Pack)clientInputStream.readObject();
-            clientInputStream.close();    
-        }catch(Exception ex){
+        try {
+            socketConnection = new Socket(ip, 11111);
+            clientInputStream = new ObjectInputStream(socketConnection.getInputStream());
+            testTmp = (Pack) clientInputStream.readObject();
+            clientInputStream.close();
+        } catch (Exception ex) {
             System.out.println("Error");
         }
-        startConnection(ip,MainMenu.user.getLogin(),this);
-        
-        
+        startConnection(ip, MainMenu.user.getLogin(), this);
         userss j = new userss();
         j.setLogin(MainMenu.user.getLogin());
         j.setName(MainMenu.user.getName_sur());
@@ -94,22 +98,43 @@ public class game_proc extends javax.swing.JFrame {
         jLabel25.setText(list_user.get(0).getLogin());
         jLabel26.setText(list_user.get(0).getName_sur());
         jLabel32.setText(String.valueOf(list_user.get(0).getBals()));
+        Interface();
+        Thread run = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true){
+                    try {
+                        jLabel23.setText(String.valueOf(balss));
+                        if(!jButton3.isVisible() && !jButton4.isVisible() && !jButton5.isVisible() && !jButton6.isVisible() && !jButton7.isVisible() 
+                                && !jButton8.isVisible() && !jButton9.isVisible() && !jButton10.isVisible() && !jButton11.isVisible() && !jButton12.isVisible() 
+                                && !jButton13.isVisible() && !jButton14.isVisible() && !jButton15.isVisible() && !jButton27.isVisible() && !jButton16.isVisible() 
+                                && !jButton17.isVisible() && !jButton18.isVisible() && !jButton19.isVisible() && !jButton20.isVisible() && !jButton21.isVisible() 
+                                && !jButton22.isVisible() && !jButton23.isVisible() && !jButton24.isVisible() && !jButton25.isVisible() && !jButton26.isVisible())
+                        {
+                            JOptionPane.showMessageDialog(null, "Раунд 2!");
+                        }
+                        Thread.sleep(1000); //1000 - 1 сек
+                    } catch (InterruptedException ex) {
+                    }
+                }
+            }
+        });
+        run.start();
     }
-        
-    public game_proc(String ip1,String e) {
+
+    public game_proc(String ip1, String e) {
         initComponents();
         ip = ip1;
-        try
-        {
-            socketConnection = new Socket (ip, 11111);  
-            clientInputStream=new ObjectInputStream(socketConnection.getInputStream());
-            testTmp=(Pack)clientInputStream.readObject();
-            clientInputStream.close();    
-        }catch(Exception ex){
+        try {
+            socketConnection = new Socket(ip, 11111);
+            clientInputStream = new ObjectInputStream(socketConnection.getInputStream());
+            testTmp = (Pack) clientInputStream.readObject();
+            clientInputStream.close();
+        } catch (Exception ex) {
             System.out.println("Error123");
         }
-        startConnection(ip,MainMenu.user.getLogin(),this);
-        
+        startConnection(ip, MainMenu.user.getLogin(), this);
+
         //sfdsafasdf
         userss j = new userss();
         j.setLogin(MainMenu.user.getLogin());
@@ -120,9 +145,749 @@ public class game_proc extends javax.swing.JFrame {
         jLabel20.setText(list_user.get(0).getLogin());
         jLabel21.setText(list_user.get(0).getName_sur());
         jLabel23.setText(String.valueOf(list_user.get(0).getBals()));
-        
-        
-        System.out.println(list_user.size());
+        Interface();
+        Thread run = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true){
+                    try {
+                        jLabel23.setText(String.valueOf(balss));
+                        if(!jButton3.isVisible() && !jButton4.isVisible() && !jButton5.isVisible() && !jButton6.isVisible() && !jButton7.isVisible() 
+                                && !jButton8.isVisible() && !jButton9.isVisible() && !jButton10.isVisible() && !jButton11.isVisible() && !jButton12.isVisible() 
+                                && !jButton13.isVisible() && !jButton14.isVisible() && !jButton15.isVisible() && !jButton27.isVisible() && !jButton16.isVisible() 
+                                && !jButton17.isVisible() && !jButton18.isVisible() && !jButton19.isVisible() && !jButton20.isVisible() && !jButton21.isVisible() 
+                                && !jButton22.isVisible() && !jButton23.isVisible() && !jButton24.isVisible() && !jButton25.isVisible() && !jButton26.isVisible())
+                        {
+                            JOptionPane.showMessageDialog(null, "Раунд 2!");
+                        }
+                        Thread.sleep(1000); //1000 - 1 сек
+                    } catch (InterruptedException ex) {
+                    }
+                }
+            }
+        });
+        run.start();
+    }
+
+    private void Interface() {
+        ArrayList<String> temu = new ArrayList<String>();
+        ArrayList<String> raund1 = new ArrayList<String>();
+        ArrayList<String> raund2 = new ArrayList<String>();
+        ArrayList<String> raund3 = new ArrayList<String>();
+        ArrayList<String> raund4 = new ArrayList<String>();
+        temu = testTmp.getTheme();
+        int a = temu.size();
+        int kikl_raund = 1;
+        System.out.println(a);
+        if (a > 5) {
+            kikl_raund++;
+        }
+        if (a > 10) {
+            kikl_raund++;
+        }
+        if (a > 15) {
+            kikl_raund++;
+        }
+        for (int i = 0; i < a; i++) {
+            if (i < 5) {
+                raund1.add(temu.get(i));
+            }
+            if (i >= 5 && i < 10) {
+                raund2.add(temu.get(i));
+            }
+            if (i >= 10 && i < 15) {
+                raund3.add(temu.get(i));
+            }
+            if (i >= 15 && i < 20) {
+                raund4.add(temu.get(i));
+            }
+        }
+        if (kikl_raund == 1) {
+            jLabel16.setText("1 з 1");
+        } else {
+            jLabel16.setText("1 з " + kikl_raund);
+        }
+        if (raund1.size() == 1) {
+            jLabel6.setText(raund1.get(0));
+            ryad2(false);
+            ryad3(false);
+            ryad4(false);
+            ryad5(false);
+            jButton8.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(0) + " 100");
+                    form12.show();
+                    jButton8.setVisible(false);
+                }
+            });
+            jButton9.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(0) + " 200");
+                    form12.show();
+                    jButton9.setVisible(false);
+                }
+            });
+            jButton10.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(0) + " 300");
+                    form12.show();
+                    jButton10.setVisible(false);
+                }
+            });
+            jButton11.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(0) + " 400");
+                    form12.show();
+                    jButton11.setVisible(false);
+                }
+            });
+            jButton7.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(0) + " 500");
+                    form12.show();
+                    jButton7.setVisible(false);
+                }
+            });
+        }
+        if (raund1.size() == 2) {
+            jLabel6.setText(raund1.get(0));
+            jLabel8.setText(raund1.get(1));
+            ryad3(false);
+            ryad4(false);
+            ryad5(false);
+            jButton8.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(0) + " 100");
+                    form12.show();
+                    jButton8.setVisible(false);
+                }
+            });
+            jButton9.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(0) + " 200");
+                    form12.show();
+                    jButton9.setVisible(false);
+                }
+            });
+            jButton10.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(0) + " 300");
+                    form12.show();
+                    jButton10.setVisible(false);
+                }
+            });
+            jButton11.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(0) + " 400");
+                    form12.show();
+                    jButton11.setVisible(false);
+                }
+            });
+            jButton7.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(0) + " 500");
+                    form12.show();
+                    jButton7.setVisible(false);
+                }
+            });
+            jButton3.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(1) + " 100");
+                    form12.show();
+                    jButton3.setVisible(false);
+                }
+            });
+            jButton4.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(1) + " 200");
+                    form12.show();
+                    jButton4.setVisible(false);
+                }
+            });
+            jButton5.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(1) + " 300");
+                    form12.show();
+                    jButton5.setVisible(false);
+                }
+            });
+            jButton6.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(1) + " 400");
+                    form12.show();
+                    jButton6.setVisible(false);
+                }
+            });
+            jButton12.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(1) + " 500");
+                    form12.show();
+                    jButton12.setVisible(false);
+                }
+            });
+        }
+        if (raund1.size() == 3) {
+            jLabel6.setText(raund1.get(0));
+            jLabel8.setText(raund1.get(1));
+            jLabel7.setText(raund1.get(2));
+            ryad4(false);
+            ryad5(false);
+            jButton8.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(0) + " 100");
+                    form12.show();
+                    jButton8.setVisible(false);
+                }
+            });
+            jButton9.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(0) + " 200");
+                    form12.show();
+                    jButton9.setVisible(false);
+                }
+            });
+            jButton10.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(0) + " 300");
+                    form12.show();
+                    jButton10.setVisible(false);
+                }
+            });
+            jButton11.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(0) + " 400");
+                    form12.show();
+                    jButton11.setVisible(false);
+                }
+            });
+            jButton7.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(0) + " 500");
+                    form12.show();
+                    jButton7.setVisible(false);
+                }
+            });
+            jButton3.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(1) + " 100");
+                    form12.show();
+                    jButton3.setVisible(false);
+                }
+            });
+            jButton4.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(1) + " 200");
+                    form12.show();
+                    jButton4.setVisible(false);
+                }
+            });
+            jButton5.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(1) + " 300");
+                    form12.show();
+                    jButton5.setVisible(false);
+                }
+            });
+            jButton6.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(1) + " 400");
+                    form12.show();
+                    jButton6.setVisible(false);
+                }
+            });
+            jButton12.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(1) + " 500");
+                    form12.show();
+                    jButton12.setVisible(false);
+                }
+            });
+            jButton18.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(2) + " 100");
+                    form12.show();
+                    jButton3.setVisible(false);
+                }
+            });
+            jButton14.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(2) + " 200");
+                    form12.show();
+                    jButton4.setVisible(false);
+                }
+            });
+            jButton23.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(2) + " 300");
+                    form12.show();
+                    jButton5.setVisible(false);
+                }
+            });
+            jButton16.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(2) + " 400");
+                    form12.show();
+                    jButton6.setVisible(false);
+                }
+            });
+            jButton17.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(2) + " 500");
+                    form12.show();
+                    jButton12.setVisible(false);
+                }
+            });
+        }
+        if (raund1.size() == 4) {
+            jLabel6.setText(raund1.get(0));
+            jLabel8.setText(raund1.get(1));
+            jLabel7.setText(raund1.get(2));
+            jLabel9.setText(raund1.get(3));
+            ryad5(false);
+            jButton8.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(0) + " 100");
+                    form12.show();
+                    jButton8.setVisible(false);
+                }
+            });
+            jButton9.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(0) + " 200");
+                    form12.show();
+                    jButton9.setVisible(false);
+                }
+            });
+            jButton10.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(0) + " 300");
+                    form12.show();
+                    jButton10.setVisible(false);
+                }
+            });
+            jButton11.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(0) + " 400");
+                    form12.show();
+                    jButton11.setVisible(false);
+                }
+            });
+            jButton7.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(0) + " 500");
+                    form12.show();
+                    jButton7.setVisible(false);
+                }
+            });
+            jButton3.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(1) + " 100");
+                    form12.show();
+                    jButton3.setVisible(false);
+                }
+            });
+            jButton4.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(1) + " 200");
+                    form12.show();
+                    jButton4.setVisible(false);
+                }
+            });
+            jButton5.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(1) + " 300");
+                    form12.show();
+                    jButton5.setVisible(false);
+                }
+            });
+            jButton6.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(1) + " 400");
+                    form12.show();
+                    jButton6.setVisible(false);
+                }
+            });
+            jButton12.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(1) + " 500");
+                    form12.show();
+                    jButton12.setVisible(false);
+                }
+            });
+            jButton18.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(2) + " 100");
+                    form12.show();
+                    jButton3.setVisible(false);
+                }
+            });
+            jButton14.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(2) + " 200");
+                    form12.show();
+                    jButton4.setVisible(false);
+                }
+            });
+            jButton23.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(2) + " 300");
+                    form12.show();
+                    jButton5.setVisible(false);
+                }
+            });
+            jButton16.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(2) + " 400");
+                    form12.show();
+                    jButton6.setVisible(false);
+                }
+            });
+            jButton17.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(2) + " 500");
+                    form12.show();
+                    jButton12.setVisible(false);
+                }
+            });
+            jButton13.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(3) + " 100");
+                    form12.show();
+                    jButton3.setVisible(false);
+                }
+            });
+            jButton20.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(3) + " 200");
+                    form12.show();
+                    jButton4.setVisible(false);
+                }
+            });
+            jButton15.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(3) + " 300");
+                    form12.show();
+                    jButton5.setVisible(false);
+                }
+            });
+            jButton25.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(3) + " 400");
+                    form12.show();
+                    jButton6.setVisible(false);
+                }
+            });
+            jButton26.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(3) + " 500");
+                    form12.show();
+                    jButton12.setVisible(false);
+                }
+            });
+        }
+        if (raund1.size() == 5) {
+            jLabel6.setText(raund1.get(0));
+            jLabel8.setText(raund1.get(1));
+            jLabel7.setText(raund1.get(2));
+            jLabel9.setText(raund1.get(3));
+            jLabel10.setText(raund1.get(4));
+            jButton8.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(0) + " 100");
+                    form12.show();
+                    jButton8.setVisible(false);
+                }
+            });
+            jButton9.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(0) + " 200");
+                    form12.show();
+                    jButton9.setVisible(false);
+                }
+            });
+            jButton10.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(0) + " 300");
+                    form12.show();
+                    jButton10.setVisible(false);
+                }
+            });
+            jButton11.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(0) + " 400");
+                    form12.show();
+                    jButton11.setVisible(false);
+                }
+            });
+            jButton7.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(0) + " 500");
+                    form12.show();
+                    jButton7.setVisible(false);
+                }
+            });
+            jButton3.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(1) + " 100");
+                    form12.show();
+                    jButton3.setVisible(false);
+                }
+            });
+            jButton4.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(1) + " 200");
+                    form12.show();
+                    jButton4.setVisible(false);
+                }
+            });
+            jButton5.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(1) + " 300");
+                    form12.show();
+                    jButton5.setVisible(false);
+                }
+            });
+            jButton6.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(1) + " 400");
+                    form12.show();
+                    jButton6.setVisible(false);
+                }
+            });
+            jButton12.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(1) + " 500");
+                    form12.show();
+                    jButton12.setVisible(false);
+                }
+            });
+            jButton18.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(2) + " 100");
+                    form12.show();
+                    jButton3.setVisible(false);
+                }
+            });
+            jButton14.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(2) + " 200");
+                    form12.show();
+                    jButton4.setVisible(false);
+                }
+            });
+            jButton23.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(2) + " 300");
+                    form12.show();
+                    jButton5.setVisible(false);
+                }
+            });
+            jButton16.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(2) + " 400");
+                    form12.show();
+                    jButton6.setVisible(false);
+                }
+            });
+            jButton17.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(2) + " 500");
+                    form12.show();
+                    jButton12.setVisible(false);
+                }
+            });
+            jButton13.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(3) + " 100");
+                    form12.show();
+                    jButton3.setVisible(false);
+                }
+            });
+            jButton20.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(3) + " 200");
+                    form12.show();
+                    jButton4.setVisible(false);
+                }
+            });
+            jButton15.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(3) + " 300");
+                    form12.show();
+                    jButton5.setVisible(false);
+                }
+            });
+            jButton25.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(3) + " 400");
+                    form12.show();
+                    jButton6.setVisible(false);
+                }
+            });
+            jButton26.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(3) + " 500");
+                    form12.show();
+                    jButton12.setVisible(false);
+                }
+            });
+            jButton19.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(4) + " 100");
+                    form12.show();
+                    jButton3.setVisible(false);
+                }
+            });
+            jButton21.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(4) + " 200");
+                    form12.show();
+                    jButton4.setVisible(false);
+                }
+            });
+            jButton22.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(4) + " 300");
+                    form12.show();
+                    jButton5.setVisible(false);
+                }
+            });
+            jButton24.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(4) + " 400");
+                    form12.show();
+                    jButton6.setVisible(false);
+                }
+            });
+            jButton27.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    question_form form12 = new question_form();
+                    form12.setTitle(raund1.get(4) + " 500");
+                    form12.show();
+                    jButton12.setVisible(false);
+                }
+            });
+        }
+
+    }
+
+    private void ryad1(boolean a) {
+        jLabel6.setVisible(a);
+        jButton8.setVisible(a);
+        jButton9.setVisible(a);
+        jButton10.setVisible(a);
+        jButton11.setVisible(a);
+        jButton7.setVisible(a);
+    }
+
+    private void ryad2(boolean a) {
+        jLabel8.setVisible(a);
+        jButton3.setVisible(a);
+        jButton4.setVisible(a);
+        jButton5.setVisible(a);
+        jButton6.setVisible(a);
+        jButton12.setVisible(a);
+    }
+
+    private void ryad3(boolean a) {
+        jLabel7.setVisible(a);
+        jButton18.setVisible(a);
+        jButton14.setVisible(a);
+        jButton23.setVisible(a);
+        jButton16.setVisible(a);
+        jButton17.setVisible(a);
+    }
+
+    private void ryad4(boolean a) {
+        jLabel9.setVisible(a);
+        jButton13.setVisible(a);
+        jButton20.setVisible(a);
+        jButton15.setVisible(a);
+        jButton25.setVisible(a);
+        jButton26.setVisible(a);
+    }
+
+    private void ryad5(boolean a) {
+        jLabel10.setVisible(a);
+        jButton19.setVisible(a);
+        jButton21.setVisible(a);
+        jButton22.setVisible(a);
+        jButton24.setVisible(a);
+        jButton27.setVisible(a);
     }
 
     /**
@@ -154,17 +919,11 @@ public class game_proc extends javax.swing.JFrame {
         jLabel27 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -190,6 +949,7 @@ public class game_proc extends javax.swing.JFrame {
         jButton25 = new javax.swing.JButton();
         jButton26 = new javax.swing.JButton();
         jButton27 = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -253,7 +1013,7 @@ public class game_proc extends javax.swing.JFrame {
             }
         });
 
-        jLabel19.setText("Гравець №1");
+        jLabel19.setText("Гравець ");
 
         jLabel20.setText("jLabel20");
 
@@ -322,165 +1082,240 @@ public class game_proc extends javax.swing.JFrame {
         );
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("jLabel4");
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("jLabel5");
+        jLabel4.setText("Раунд №");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("jLabel6");
+        jLabel6.setMinimumSize(null);
+        jLabel6.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("jLabel7");
+        jLabel7.setMinimumSize(null);
+        jLabel7.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("jLabel8");
+        jLabel8.setMinimumSize(null);
+        jLabel8.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("jLabel9");
+        jLabel9.setMinimumSize(null);
+        jLabel9.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setText("jLabel10");
-
-        jLabel11.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel11.setText("100");
-
-        jLabel12.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel12.setText("200");
-
-        jLabel13.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel13.setText("300");
-
-        jLabel14.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel14.setText("400");
-
-        jLabel15.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel15.setText("500");
+        jLabel10.setMinimumSize(null);
+        jLabel10.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jButton3.setBackground(new java.awt.Color(0, 0, 153));
         jButton3.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("100");
+        jButton3.setMaximumSize(new java.awt.Dimension(60, 33));
+        jButton3.setMinimumSize(new java.awt.Dimension(60, 33));
+        jButton3.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jButton4.setBackground(new java.awt.Color(0, 0, 153));
         jButton4.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("200");
+        jButton4.setMaximumSize(new java.awt.Dimension(60, 33));
+        jButton4.setMinimumSize(new java.awt.Dimension(60, 33));
+        jButton4.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jButton5.setBackground(new java.awt.Color(0, 0, 153));
         jButton5.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("300");
+        jButton5.setMaximumSize(new java.awt.Dimension(60, 33));
+        jButton5.setMinimumSize(new java.awt.Dimension(60, 33));
+        jButton5.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jButton6.setBackground(new java.awt.Color(0, 0, 153));
         jButton6.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setText("400");
+        jButton6.setMaximumSize(new java.awt.Dimension(60, 33));
+        jButton6.setMinimumSize(new java.awt.Dimension(60, 33));
+        jButton6.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jButton7.setBackground(new java.awt.Color(0, 0, 153));
         jButton7.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
         jButton7.setForeground(new java.awt.Color(255, 255, 255));
         jButton7.setText("500");
+        jButton7.setMaximumSize(new java.awt.Dimension(60, 33));
+        jButton7.setMinimumSize(new java.awt.Dimension(60, 33));
+        jButton7.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jButton8.setBackground(new java.awt.Color(0, 0, 153));
         jButton8.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
         jButton8.setForeground(new java.awt.Color(255, 255, 255));
         jButton8.setText("100");
+        jButton8.setMaximumSize(new java.awt.Dimension(60, 33));
+        jButton8.setMinimumSize(new java.awt.Dimension(60, 33));
+        jButton8.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jButton9.setBackground(new java.awt.Color(0, 0, 153));
         jButton9.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
         jButton9.setForeground(new java.awt.Color(255, 255, 255));
         jButton9.setText("200");
+        jButton9.setMaximumSize(new java.awt.Dimension(60, 33));
+        jButton9.setMinimumSize(new java.awt.Dimension(60, 33));
+        jButton9.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jButton10.setBackground(new java.awt.Color(0, 0, 153));
         jButton10.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
         jButton10.setForeground(new java.awt.Color(255, 255, 255));
         jButton10.setText("300");
+        jButton10.setMaximumSize(new java.awt.Dimension(60, 33));
+        jButton10.setMinimumSize(new java.awt.Dimension(60, 33));
+        jButton10.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jButton11.setBackground(new java.awt.Color(0, 0, 153));
         jButton11.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
         jButton11.setForeground(new java.awt.Color(255, 255, 255));
         jButton11.setText("400");
+        jButton11.setMaximumSize(new java.awt.Dimension(60, 33));
+        jButton11.setMinimumSize(new java.awt.Dimension(60, 33));
+        jButton11.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jButton12.setBackground(new java.awt.Color(0, 0, 153));
         jButton12.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
         jButton12.setForeground(new java.awt.Color(255, 255, 255));
         jButton12.setText("500");
+        jButton12.setMaximumSize(new java.awt.Dimension(60, 33));
+        jButton12.setMinimumSize(new java.awt.Dimension(60, 33));
+        jButton12.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jButton13.setBackground(new java.awt.Color(0, 0, 153));
         jButton13.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
         jButton13.setForeground(new java.awt.Color(255, 255, 255));
         jButton13.setText("100");
+        jButton13.setMaximumSize(new java.awt.Dimension(60, 33));
+        jButton13.setMinimumSize(new java.awt.Dimension(60, 33));
+        jButton13.setPreferredSize(new java.awt.Dimension(150, 50));
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
 
         jButton14.setBackground(new java.awt.Color(0, 0, 153));
         jButton14.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
         jButton14.setForeground(new java.awt.Color(255, 255, 255));
         jButton14.setText("200");
+        jButton14.setMaximumSize(new java.awt.Dimension(60, 33));
+        jButton14.setMinimumSize(new java.awt.Dimension(60, 33));
+        jButton14.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jButton15.setBackground(new java.awt.Color(0, 0, 153));
         jButton15.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
         jButton15.setForeground(new java.awt.Color(255, 255, 255));
         jButton15.setText("300");
+        jButton15.setMaximumSize(new java.awt.Dimension(60, 33));
+        jButton15.setMinimumSize(new java.awt.Dimension(60, 33));
+        jButton15.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jButton16.setBackground(new java.awt.Color(0, 0, 153));
         jButton16.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
         jButton16.setForeground(new java.awt.Color(255, 255, 255));
         jButton16.setText("400");
+        jButton16.setMaximumSize(new java.awt.Dimension(60, 33));
+        jButton16.setMinimumSize(new java.awt.Dimension(60, 33));
+        jButton16.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jButton17.setBackground(new java.awt.Color(0, 0, 153));
         jButton17.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
         jButton17.setForeground(new java.awt.Color(255, 255, 255));
         jButton17.setText("500");
+        jButton17.setMaximumSize(new java.awt.Dimension(60, 33));
+        jButton17.setMinimumSize(new java.awt.Dimension(60, 33));
+        jButton17.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jButton18.setBackground(new java.awt.Color(0, 0, 153));
         jButton18.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
         jButton18.setForeground(new java.awt.Color(255, 255, 255));
         jButton18.setText("100");
+        jButton18.setMaximumSize(new java.awt.Dimension(60, 33));
+        jButton18.setMinimumSize(new java.awt.Dimension(60, 33));
+        jButton18.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jButton19.setBackground(new java.awt.Color(0, 0, 153));
         jButton19.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
         jButton19.setForeground(new java.awt.Color(255, 255, 255));
         jButton19.setText("100");
+        jButton19.setMaximumSize(new java.awt.Dimension(60, 33));
+        jButton19.setMinimumSize(new java.awt.Dimension(60, 33));
+        jButton19.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jButton20.setBackground(new java.awt.Color(0, 0, 153));
         jButton20.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
         jButton20.setForeground(new java.awt.Color(255, 255, 255));
         jButton20.setText("200");
+        jButton20.setMaximumSize(new java.awt.Dimension(60, 33));
+        jButton20.setMinimumSize(new java.awt.Dimension(60, 33));
+        jButton20.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jButton21.setBackground(new java.awt.Color(0, 0, 153));
         jButton21.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
         jButton21.setForeground(new java.awt.Color(255, 255, 255));
         jButton21.setText("200");
+        jButton21.setMaximumSize(new java.awt.Dimension(60, 33));
+        jButton21.setMinimumSize(new java.awt.Dimension(60, 33));
+        jButton21.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jButton22.setBackground(new java.awt.Color(0, 0, 153));
         jButton22.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
         jButton22.setForeground(new java.awt.Color(255, 255, 255));
         jButton22.setText("300");
+        jButton22.setMaximumSize(new java.awt.Dimension(60, 33));
+        jButton22.setMinimumSize(new java.awt.Dimension(60, 33));
+        jButton22.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jButton23.setBackground(new java.awt.Color(0, 0, 153));
         jButton23.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
         jButton23.setForeground(new java.awt.Color(255, 255, 255));
         jButton23.setText("300");
+        jButton23.setMaximumSize(new java.awt.Dimension(60, 33));
+        jButton23.setMinimumSize(new java.awt.Dimension(60, 33));
+        jButton23.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jButton24.setBackground(new java.awt.Color(0, 0, 153));
         jButton24.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
         jButton24.setForeground(new java.awt.Color(255, 255, 255));
         jButton24.setText("400");
+        jButton24.setMaximumSize(new java.awt.Dimension(60, 33));
+        jButton24.setMinimumSize(new java.awt.Dimension(60, 33));
+        jButton24.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jButton25.setBackground(new java.awt.Color(0, 0, 153));
         jButton25.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
         jButton25.setForeground(new java.awt.Color(255, 255, 255));
         jButton25.setText("400");
+        jButton25.setMaximumSize(new java.awt.Dimension(60, 33));
+        jButton25.setMinimumSize(new java.awt.Dimension(60, 33));
+        jButton25.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jButton26.setBackground(new java.awt.Color(0, 0, 153));
         jButton26.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
         jButton26.setForeground(new java.awt.Color(255, 255, 255));
         jButton26.setText("500");
+        jButton26.setMaximumSize(new java.awt.Dimension(60, 33));
+        jButton26.setMinimumSize(new java.awt.Dimension(60, 33));
+        jButton26.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jButton27.setBackground(new java.awt.Color(0, 0, 153));
         jButton27.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
         jButton27.setForeground(new java.awt.Color(255, 255, 255));
         jButton27.setText("500");
+        jButton27.setMaximumSize(new java.awt.Dimension(60, 33));
+        jButton27.setMinimumSize(new java.awt.Dimension(60, 33));
+        jButton27.setPreferredSize(new java.awt.Dimension(150, 50));
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel16.setText("jLabel16");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -497,7 +1332,7 @@ public class game_proc extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))))
+                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -508,65 +1343,63 @@ public class game_proc extends javax.swing.JFrame {
                         .addGap(28, 28, 28))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel6))
-                                .addGap(122, 122, 122)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton8)
-                                    .addComponent(jButton18)
-                                    .addComponent(jButton13)
-                                    .addComponent(jButton19)
-                                    .addComponent(jButton3))
-                                .addGap(68, 68, 68)
+                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(27, 27, 27)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton4)
-                                    .addComponent(jButton9)
-                                    .addComponent(jButton14)
-                                    .addComponent(jButton20)
-                                    .addComponent(jButton21))
-                                .addGap(68, 68, 68)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton22)
-                                    .addComponent(jButton15)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(203, 203, 203)
+                                        .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(27, 27, 27)
+                                        .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jButton20, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(26, 26, 26)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(27, 27, 27))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(27, 27, 27)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(131, 131, 131)
-                                .addComponent(jLabel11)
-                                .addGap(100, 100, 100)
-                                .addComponent(jLabel12)
-                                .addGap(100, 100, 100)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jButton10)
-                                    .addComponent(jButton5)
-                                    .addComponent(jButton23))
-                                .addGap(69, 69, 69)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel14)
-                                        .addGap(99, 99, 99)
-                                        .addComponent(jLabel15))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jButton6)
-                                            .addComponent(jButton16)
-                                            .addComponent(jButton11)
-                                            .addComponent(jButton24)
-                                            .addComponent(jButton25))
-                                        .addGap(67, 67, 67)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jButton12)
-                                            .addComponent(jButton7)
-                                            .addComponent(jButton17)
-                                            .addComponent(jButton26)
-                                            .addComponent(jButton27))))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel16)))
+                        .addGap(19, 19, 19)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -582,57 +1415,52 @@ public class game_proc extends javax.swing.JFrame {
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel11)
-                        .addComponent(jLabel12)
-                        .addComponent(jLabel13)
-                        .addComponent(jLabel14)
-                        .addComponent(jLabel15)))
-                .addGap(35, 35, 35)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel16))
+                .addGap(84, 84, 84)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton8)
-                    .addComponent(jButton9)
-                    .addComponent(jLabel6)
-                    .addComponent(jButton10)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                    .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton16)
-                    .addComponent(jButton12)
-                    .addComponent(jButton5)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton14)
-                    .addComponent(jButton11)
-                    .addComponent(jButton17)
-                    .addComponent(jButton18)
-                    .addComponent(jButton23)
-                    .addComponent(jLabel8))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton13)
-                    .addComponent(jButton20)
-                    .addComponent(jButton15)
-                    .addComponent(jButton24)
-                    .addComponent(jButton26)
-                    .addComponent(jLabel9))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton19)
-                    .addComponent(jButton21)
-                    .addComponent(jButton22)
-                    .addComponent(jButton25)
-                    .addComponent(jButton27)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -640,41 +1468,40 @@ public class game_proc extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addGap(43, 43, 43))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyPressed
-        if(jTextField3.getText().compareTo("Напишіть повідомлення...")==0 &&
-           (KeyEvent.VK_BACK_SPACE==evt.getKeyCode() ||
-            KeyEvent.VK_SPACE==evt.getKeyCode() ||
-            KeyEvent.VK_ESCAPE==evt.getKeyCode() ||
-            KeyEvent.CHAR_UNDEFINED==evt.getKeyChar() ||
-            KeyEvent.VK_DELETE==evt.getKeyChar() ||
-            evt.isActionKey()==true))  
-        {
+        if (jTextField3.getText().compareTo("Напишіть повідомлення...") == 0
+                && (KeyEvent.VK_BACK_SPACE == evt.getKeyCode()
+                || KeyEvent.VK_SPACE == evt.getKeyCode()
+                || KeyEvent.VK_ESCAPE == evt.getKeyCode()
+                || KeyEvent.CHAR_UNDEFINED == evt.getKeyChar()
+                || KeyEvent.VK_DELETE == evt.getKeyChar()
+                || evt.isActionKey() == true)) {
             evt.consume();
             return;
         }
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            if(jTextField3.getText().compareTo("Напишіть повідомлення...")!=0 &&
-                jTextField3.getText().compareTo("")!=0){
-            client.sendMessage(jTextField3.getText());
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (jTextField3.getText().compareTo("Напишіть повідомлення...") != 0
+                    && jTextField3.getText().compareTo("") != 0) {
+                client.sendMessage(jTextField3.getText());
             }
             jTextField3.setText("Напишіть повідомлення...");
             jTextField3.setForeground(Color.GRAY);
             return;
         }
-        
-        if(jTextField3.getText().compareTo("Напишіть повідомлення...")==0){
+
+        if (jTextField3.getText().compareTo("Напишіть повідомлення...") == 0) {
             jTextField3.setText("");
             jTextField3.setForeground(Color.DARK_GRAY);
             return;
         }
-        
-        if(KeyEvent.VK_BACK_SPACE==evt.getKeyCode() && jTextField3.getText().length()==1) {
+
+        if (KeyEvent.VK_BACK_SPACE == evt.getKeyCode() && jTextField3.getText().length() == 1) {
             jTextField3.setText("Напишіть повідомлення...");
             jTextField3.setForeground(Color.GRAY);
             evt.consume();
@@ -691,13 +1518,17 @@ public class game_proc extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if(jTextField3.getText().compareTo("Напишіть повідомлення...")!=0 &&
-                jTextField3.getText().compareTo("")!=0){
+        if (jTextField3.getText().compareTo("Напишіть повідомлення...") != 0
+                && jTextField3.getText().compareTo("") != 0) {
             client.sendMessage(jTextField3.getText());
         }
         jTextField3.setText("Напишіть повідомлення...");
         jTextField3.setForeground(Color.DARK_GRAY);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton13ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -764,11 +1595,7 @@ public class game_proc extends javax.swing.JFrame {
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     public javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     public javax.swing.JLabel jLabel20;
@@ -782,7 +1609,6 @@ public class game_proc extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     public javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
