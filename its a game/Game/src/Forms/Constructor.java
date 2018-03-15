@@ -5,6 +5,7 @@
  */
 package Forms;
 
+import game.Game_pack_theme;
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import game.Question;
@@ -44,7 +45,6 @@ public class Constructor extends javax.swing.JFrame {
         buttonGroup1.add(jRadioButton3);
         buttonGroup1.add(jRadioButton4);
         buttonGroup1.add(jRadioButton5);
-        setValue(100);
         changeStance(false);
     }
 
@@ -75,11 +75,13 @@ public class Constructor extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,6 +92,7 @@ public class Constructor extends javax.swing.JFrame {
         jTextField2.setText("1");
         jTextField2.setEnabled(false);
 
+        jRadioButton1.setSelected(true);
         jRadioButton1.setText("100");
 
         jRadioButton2.setText("200");
@@ -101,6 +104,11 @@ public class Constructor extends javax.swing.JFrame {
         jRadioButton5.setText("500");
 
         jTextField3.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Відповідь");
@@ -128,6 +136,13 @@ public class Constructor extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel4.setText("Запитання");
+
+        jButton4.setText("jButton4");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("Файл");
 
@@ -157,6 +172,14 @@ public class Constructor extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setText("Перевірити питання на вартість");
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jMenu2);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -166,6 +189,30 @@ public class Constructor extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(35, 35, 35)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton4)
+                                .addGap(37, 37, 37)
+                                .addComponent(jButton3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField3)
+                                    .addComponent(jTextField4)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel4))
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2)))
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -182,29 +229,7 @@ public class Constructor extends javax.swing.JFrame {
                         .addComponent(jRadioButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jRadioButton5)
-                        .addGap(22, 22, 22))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(35, 35, 35)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton3))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField3)
-                                    .addComponent(jTextField4)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel4))
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2)))
-                        .addContainerGap())))
+                        .addGap(22, 22, 22))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,8 +238,9 @@ public class Constructor extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
-                .addGap(142, 142, 142)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -237,7 +263,7 @@ public class Constructor extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -248,85 +274,22 @@ public class Constructor extends javax.swing.JFrame {
         if (Integer.parseInt(jTextField2.getText()) == 1) {
             return;
         }
-        arr.set(NumberQuestion - 1, new Question(jTextField3.getText(), jTextField5.getText(), jTextField4.getText(), getValue()));
         NumberQuestion = Integer.parseInt(jTextField2.getText()) - 1;
+        if (NumberQuestion == arr.size()) {
+            arr.add(NumberQuestion, new Question(jTextField3.getText(), jTextField5.getText(), jTextField4.getText(), getValue()));
+        } else {
+            arr.set(NumberQuestion, new Question(jTextField3.getText(), jTextField5.getText(), jTextField4.getText(), getValue()));
+        }
         jTextField2.setText(NumberQuestion + "");
         showQuestion(NumberQuestion - 1);
         isSafe = false;
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private int getValue() {
-        if (jRadioButton1.isSelected()) {
-            return 100;
-        } else if (jRadioButton2.isSelected()) {
-            return 200;
-        } else if (jRadioButton3.isSelected()) {
-            return 300;
-        } else if (jRadioButton4.isSelected()) {
-            return 400;
-        } else {
-            return 500;
-        }
-    }
-
-    void changeStance(boolean x) {
-        jLabel2.setEnabled(x);
-        jLabel2.setEnabled(x);
-        jLabel4.setEnabled(x);
-        jTextField3.setEnabled(x);
-        jTextField4.setEnabled(x);
-        jTextField5.setEnabled(x);
-        jButton1.setEnabled(x);
-        jButton2.setEnabled(x);
-        jRadioButton1.setEnabled(x);
-        jRadioButton2.setEnabled(x);
-        jRadioButton3.setEnabled(x);
-        jRadioButton4.setEnabled(x);
-        jRadioButton5.setEnabled(x);
-        
-        jTextField1.setEnabled(!x);
-        jButton3.setEnabled(!x);
-        jLabel1.setEnabled(!x);
-
-    }
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         testNameTemp = jTextField1.getText();
         changeStance(true);
 
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void save() {
-        Question quest = new Question(jTextField3.getText(), jTextField5.getText(), jTextField4.getText(), getValue());
-
-        String filename = "dfd.pac";
-        try {
-            FileOutputStream fos;
-            fos = new FileOutputStream(filename);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(quest);
-            oos.close();
-            fos.close();
-        } catch (FileNotFoundException ex) {
-        } catch (IOException ex) {
-        }
-    }
-
-    private void load() {
-        try {
-            String filename = "dfd.pac";
-            FileInputStream fis = new FileInputStream(filename);
-            ObjectInputStream oin = new ObjectInputStream(fis);
-            Question ts = (Question) oin.readObject();
-            jTextField5.setText(ts.getTheme());
-            jTextField3.setText(ts.getText());
-            jTextField4.setText(ts.getAnswer());
-            setValue(ts.getValue());
-
-        } catch (ClassNotFoundException ex) {
-        } catch (FileNotFoundException ex) {
-        } catch (IOException ex) {
-        }
-    }
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         if (!isSafe) {
@@ -410,7 +373,7 @@ public class Constructor extends javax.swing.JFrame {
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Packs", "pac");
         chooser.setFileFilter(filter);
         int returnVal = chooser.showOpenDialog(null);
-        if (returnVal == JFileChooser.APPROVE_OPTION) { //Читання з файла
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
             String filename = chooser.getSelectedFile().getAbsolutePath();
             try {
                 FileInputStream fis = new FileInputStream(filename);
@@ -432,7 +395,11 @@ public class Constructor extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         NumberQuestion = Integer.parseInt(jTextField2.getText());
-        arr.set(NumberQuestion - 1, new Question(jTextField3.getText(), jTextField5.getText(), jTextField4.getText(), getValue()));
+        if (NumberQuestion > arr.size()) {
+            arr.add(NumberQuestion - 1, new Question(jTextField3.getText(), jTextField5.getText(), jTextField4.getText(), getValue()));
+        } else {
+            arr.set(NumberQuestion - 1, new Question(jTextField3.getText(), jTextField5.getText(), jTextField4.getText(), getValue()));
+        }
         if (arr.size() > 0) {
             Pack toSave = new Pack(testNameTemp, arr);
             JFileChooser chooser = new JFileChooser("/");
@@ -458,37 +425,99 @@ public class Constructor extends javax.swing.JFrame {
             }
 
             isSafe = true;
-
+            System.out.println(arr);
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
         NumberQuestion = Integer.parseInt(jTextField2.getText());
-        if ((jTextField3.getText() == "") || (jTextField4.getText() == "") || (jTextField5.getText() == "")) {
-            return;
-        } else if (NumberQuestion < arr.size()) {
+        if ((jTextField3.getText() != null) || (jTextField4.getText() != null) || (jTextField5.getText() != null) || (jTextField3.equals("")) || (jTextField4.equals("")) || (jTextField5.equals(""))) {
+            if (NumberQuestion < arr.size()) {
 
-            arr.set(NumberQuestion - 1, new Question(jTextField3.getText(),
-                    jTextField5.getText(),
-                    jTextField4.getText(), getValue()));
-            NumberQuestion = Integer.parseInt(jTextField2.getText()) + 1;
-            jTextField2.setText(NumberQuestion + "");
+                arr.set(NumberQuestion - 1, new Question(jTextField3.getText(),
+                        jTextField5.getText(),
+                        jTextField4.getText(), getValue()));
+                NumberQuestion++;
+                jTextField2.setText(NumberQuestion + "");
+                showQuestion(NumberQuestion - 1);
 
-            showQuestion(NumberQuestion - 1);
-
-        } else {
-            arr.add(NumberQuestion - 1, new Question(jTextField3.getText(),
-                    jTextField5.getText(),
-                    jTextField4.getText(), getValue()));
-            arr.add(new Question("", "", "", 100));
-            NumberQuestion = Integer.parseInt(jTextField2.getText()) + 1;
-            jTextField2.setText(NumberQuestion + "");
-            jTextField3.setText("");
-            jTextField4.setText("");
-            jTextField5.setText("");
+            } else {
+                arr.add(NumberQuestion - 1, new Question(jTextField3.getText(),
+                        jTextField5.getText(),
+                        jTextField4.getText(), getValue()));
+                NumberQuestion++;
+                jTextField2.setText(NumberQuestion + "");
+                jTextField3.setText("");
+                jTextField4.setText("");
+                jTextField5.setText("");
+            }
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+        checkpack();
+    }//GEN-LAST:event_jMenu2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+      checkpack();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void checkpack() {
+        Pack pack = new Pack(themeTemp, arr);
+        ArrayList<String> thems = pack.getTheme();
+        String error = "";
+        for (int i = 0; i < thems.size(); i++) {
+            Game_pack_theme gamePack = new Game_pack_theme(thems.get(i),pack);
+            gamePack.getStateByTheme();
+            error += gamePack.getError();
+        }
+        if ((error.isEmpty())&&(error.equals(""))) {
+            JOptionPane.showMessageDialog(null, "Все в порядку, всі теми мають повний набір по ціні", "InfoBox: " + "OK", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, error, "InfoBox: " + "ERROR", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    private int getValue() {
+        if (jRadioButton1.isSelected()) {
+            return 100;
+        } else if (jRadioButton2.isSelected()) {
+            return 200;
+        } else if (jRadioButton3.isSelected()) {
+            return 300;
+        } else if (jRadioButton4.isSelected()) {
+            return 400;
+        } else {
+            return 500;
+        }
+    }
+
+    void changeStance(boolean x) {
+        jLabel2.setEnabled(x);
+        jLabel2.setEnabled(x);
+        jLabel4.setEnabled(x);
+        jTextField3.setEnabled(x);
+        jTextField4.setEnabled(x);
+        jTextField5.setEnabled(x);
+        jButton1.setEnabled(x);
+        jButton2.setEnabled(x);
+        jRadioButton1.setEnabled(x);
+        jRadioButton2.setEnabled(x);
+        jRadioButton3.setEnabled(x);
+        jRadioButton4.setEnabled(x);
+        jRadioButton5.setEnabled(x);
+
+        jTextField1.setEnabled(!x);
+        jButton3.setEnabled(!x);
+        jLabel1.setEnabled(!x);
+
+    }
 
     private void showQuestion(int index) {
         Question tmp = arr.get(index);
@@ -553,11 +582,13 @@ public class Constructor extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;

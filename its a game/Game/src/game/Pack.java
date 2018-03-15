@@ -16,62 +16,62 @@ import java.util.Random;
 public class Pack implements Serializable {
 
     private String Name;
-    private ArrayList<Question> Questions;
+    private ArrayList<Question> questions;
 
     public Pack(String Name, ArrayList<Question> Questions) {
         this.Name = Name;
-        this.Questions = Questions;
+        this.questions = Questions;
     }
 
     public Question getQuestionByThemeAndValue(String theme, int value) {
-        Questions = new ArrayList<>();
-
-        ArrayList<Question> tmp = getQuestionByValue(getQuestionByTheme(theme), value);
+        ArrayList<Question> tmp = getQuestionByValue(theme,value);
         Random randob = new Random();
+
+        if (tmp.size() == 0) {
+            return null;
+        }
         return tmp.get(randob.nextInt(tmp.size()));
     }
 
-    public ArrayList<Question> getQuestionByTheme(String theme) {
-        Questions = new ArrayList<>();
+ 
 
+    public ArrayList<Question> getQuestionByValue(String theme,int val) {
         ArrayList<Question> tmp = new ArrayList<Question>();
 
-        for (int i = 0; i < Questions.size(); i++) {
-            if (Questions.get(i).getTheme() == theme) {
-                tmp.add(Questions.get(i));
+        for (int i = 0; i < questions.size(); i++) {
+            if ((questions.get(i).getValue() == val)&&(theme.equals(questions.get(i).getTheme()))) {
+                tmp.add(questions.get(i));
             }
         }
-        return tmp;
-    }
-
-    public ArrayList<Question> getQuestionByValue(ArrayList<Question> q, int val) {
-        Questions = new ArrayList<>();
-
-        ArrayList<Question> tmp = new ArrayList<Question>();
-
-        for (int i = 0; i < q.size(); i++) {
-            if (q.get(i).getValue()== val) {
-                tmp.add(q.get(i));
-            }
-        }
-        return tmp;
-    }
-
-    public ArrayList<String> getTheme() {
         
-        ArrayList<String> tmp = new ArrayList<String>();
-
-        for (int i = 0; i < Questions.size(); i++) {
-            if(!tmp.contains(Questions.get(i).getTheme())) tmp.add(Questions.get(i).getTheme());
-        }
         return tmp;
+    }
+
+    public void testValue()
+    {
+        for(int i=0;i<questions.size();i++)
+        {
+            System.out.println(questions.get(i).getValue());
+        }
     }
     
-    public Pack(int n, Pack test) {
-        Name = test.getName();
-        Questions = new ArrayList<>();
+    public ArrayList<String> getTheme() {
 
-        ArrayList<Question> tmp = test.getQuestions();
+        ArrayList<String> tmp = new ArrayList<String>();
+
+        for (int i = 0; i < questions.size(); i++) {
+            if (!tmp.contains(questions.get(i).getTheme())) {
+                tmp.add(questions.get(i).getTheme());
+            }
+        }
+        return tmp;
+    }
+
+    public Pack(int n, Pack pack) {
+        Name = pack.getName();
+        questions = new ArrayList<>();
+
+        ArrayList<Question> tmp = pack.getQuestions();
         ArrayList<Integer> usedIndex = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
@@ -81,12 +81,16 @@ public class Pack implements Serializable {
                 index = randob.nextInt(tmp.size());
             }
             usedIndex.add(index);
-            Questions.add(tmp.get(index));
+            questions.add(tmp.get(index));
         }
     }
 
+    public void checkPackValueByTheme() {
+
+    }
+
     public ArrayList<Question> getQuestions() {
-        return Questions;
+        return questions;
     }
 
     public String getName() {
