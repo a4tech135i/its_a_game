@@ -24,7 +24,7 @@ public class Pack implements Serializable {
     }
 
     public Question getQuestionByThemeAndValue(String theme, int value) {
-        ArrayList<Question> tmp = getQuestionByValue(theme,value);
+        ArrayList<Question> tmp = getQuestionByValue(theme, value);
         Random randob = new Random();
 
         if (tmp.size() == 0) {
@@ -33,28 +33,35 @@ public class Pack implements Serializable {
         return tmp.get(randob.nextInt(tmp.size()));
     }
 
- 
-
-    public ArrayList<Question> getQuestionByValue(String theme,int val) {
+    public ArrayList<Question> getQuestionByValue(String theme, int val) {
         ArrayList<Question> tmp = new ArrayList<Question>();
 
         for (int i = 0; i < questions.size(); i++) {
-            if ((questions.get(i).getValue() == val)&&(theme.equals(questions.get(i).getTheme()))) {
+            if ((questions.get(i).getValue() == val) && (theme.equals(questions.get(i).getTheme()))) {
                 tmp.add(questions.get(i));
             }
         }
-        
+
         return tmp;
     }
 
-    public void testValue()
-    {
-        for(int i=0;i<questions.size();i++)
-        {
+    public ArrayList<Question> getQuestionByTheme(String theme) {
+        ArrayList<Question> tmp = new ArrayList<Question>();
+
+        for (int i = 0; i < questions.size(); i++) {
+            if (theme.equals(questions.get(i).getTheme())) {
+                tmp.add(questions.get(i));
+            }
+        }
+        return tmp;
+    }
+
+    public void testValue() {
+        for (int i = 0; i < questions.size(); i++) {
             System.out.println(questions.get(i).getValue());
         }
     }
-    
+
     public ArrayList<String> getTheme() {
 
         ArrayList<String> tmp = new ArrayList<String>();
