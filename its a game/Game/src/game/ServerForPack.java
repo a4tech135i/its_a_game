@@ -20,22 +20,16 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author admin
- */
+
 public class ServerForPack implements Runnable
 {
     private Pack test;
     private ServerSocket socketConnection;
     private ObjectOutputStream serverOutputStream;
     private serverKeeper keeper;
-    private Pack TT;
-    
+    private Pack TT;   
     public ServerForPack(Pack t)
     {        
-        /*keeper=new serverKeeper(t);
-        keeper.start();*/
         TT = t;
     }
     
@@ -83,6 +77,5 @@ public class ServerForPack implements Runnable
                 this.stop();
             } catch (IOException ex) {Logger.getLogger(ServerForPack.class.getName()).log(Level.SEVERE, null, ex);}            
         }
-    }
-    
+    } 
 }

@@ -134,7 +134,7 @@ public class question_form extends javax.swing.JFrame {
             {
                 JOptionPane.showMessageDialog(null, "Кількість набраних балів = " + balss+ "\nПак закінчився!");
                 //game_proc.yksho_1_raund=false;
-                game_proc.client.sendMessage("%|"+game_proc.balss);
+                //game_proc.client.sendMessage("%*"+game_proc.balss);
                 return;
             }
             if(game_proc.lll)

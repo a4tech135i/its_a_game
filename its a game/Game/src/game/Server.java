@@ -24,7 +24,6 @@ public class Server implements Runnable{
   private ServerSocket server;
 
   public Server() {
-    
   }
 
   @Override
@@ -60,35 +59,27 @@ public class Server implements Runnable{
     }
   }
 
-
 private class Connection extends Thread {
     private BufferedReader in;
     private PrintWriter out;
     private Socket socket;
-  
     private String name = "";
-  
-  
     public Connection(Socket socket) {
       this.socket = socket;
-  
       try {
         in = new BufferedReader(new InputStreamReader(
             socket.getInputStream()));
         out = new PrintWriter(socket.getOutputStream(), true);
-  
       } catch (IOException e) {
         e.printStackTrace();
         close();
       }
     }
-  
 
     @Override
     public void run() {
       try {
         name = in.readLine();
-        
         synchronized(connections) {
           Iterator<Connection> iter = connections.iterator();
           while(iter.hasNext()) {
@@ -100,8 +91,6 @@ private class Connection extends Thread {
         while (true) {
             str = in.readLine();
             if(str.equals("exit")) break;
-
-
             synchronized(connections) {
               Iterator<Connection> iter = connections.iterator();
               while(iter.hasNext()) {
@@ -109,7 +98,7 @@ private class Connection extends Thread {
               if(a == '%')
               {
                   userss j = new userss();
-                  String[] words = str.split("|");
+                  String[] words = str.split("*");
                   ((Connection) iter.next()).out.println("Система: Гравець під ніком " + name + " набрав таку кількість балів = "+words[1]);
               }
               else
@@ -123,7 +112,6 @@ private class Connection extends Thread {
                       ((Connection) iter.next()).out.println(name + ": " + str);
                   }
               }
-                      //((Connection) iter.next()).out.println(name + ": " + str);
               }
             }
         }
@@ -140,15 +128,12 @@ private class Connection extends Thread {
         close();
       }
     }
-  
-    
+
     public void close() {
       try {
         in.close();
         out.close();
         socket.close();
-  
-        
         connections.remove(this);
         if (connections.size() == 0) {
           Server.this.closeAll();

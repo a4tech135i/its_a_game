@@ -30,7 +30,6 @@ import javax.swing.table.DefaultTableModel;
  * @author Andriy
  */
 public class game_proc extends javax.swing.JFrame {
-
     String ip;
     static Client client;
     private Socket socketConnection;
@@ -130,7 +129,6 @@ public class game_proc extends javax.swing.JFrame {
                             {
                                 lll = true;
                                 tep_raund++;
-                                //JOptionPane.showMessageDialog(null, "Раунд "+tep_raund+"!");
                                 if(tep_raund<=kikl_raund)
                                 {
                                     if(tep_raund == 2)
@@ -153,7 +151,6 @@ public class game_proc extends javax.swing.JFrame {
                                 zmina_dlya_sekundametra = false;
                                 yksho_1_raund = true;
                             }
-                            
                         }
                         Thread.sleep(1000); //1000 - 1 сек
                     } catch (InterruptedException ex) {
@@ -175,7 +172,7 @@ public class game_proc extends javax.swing.JFrame {
             testTmp = (Pack) clientInputStream.readObject();
             clientInputStream.close();
         } catch (Exception ex) {
-            System.out.println("Error123");
+            System.out.println("Error1235");
         }
         startConnection(ip, MainMenu.user.getLogin(), this);
         userss j = new userss();
@@ -235,7 +232,7 @@ public class game_proc extends javax.swing.JFrame {
                             }
                             
                         }
-                        Thread.sleep(1000); //1000 - 1 сек
+                        Thread.sleep(1000);
                     } catch (InterruptedException ex) {
                     }
                 }
@@ -3020,6 +3017,14 @@ public class game_proc extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 153, 255));
         setForeground(new java.awt.Color(51, 153, 255));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Назва паку:");
 
@@ -3566,6 +3571,14 @@ public class game_proc extends javax.swing.JFrame {
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        
+    }//GEN-LAST:event_formWindowClosing
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        client.stopClient();
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

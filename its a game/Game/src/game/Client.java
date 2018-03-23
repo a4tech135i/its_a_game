@@ -12,7 +12,6 @@ import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
 public class Client {
-
     private BufferedReader in;
     private PrintWriter out;
     private Socket socket;
@@ -25,7 +24,6 @@ public class Client {
     public Client() {
 
     }
-
     public Client(String clientName, String ip, javax.swing.JTable outSource) {
         this.clientName = clientName;
         this.ip = ip;
@@ -40,9 +38,7 @@ public class Client {
             resend.start();
         } catch (IOException e) {
             System.err.println(e.getMessage());
-        } finally {
-            //close();
-        }
+        } finally {        }
     }
 
     public void setClientName(String clientName) {
@@ -67,14 +63,11 @@ public class Client {
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
             out.println(this.clientName);
-
             resend = new Resender();
             resend.start();
-            //sendMessage("%|"+MainMenu.user.getLogin()+"|"+MainMenu.user.getName_sur());
         } catch (IOException e) {
             System.err.println(e.getMessage());
         } finally {
-            //close();
         }
     }
 

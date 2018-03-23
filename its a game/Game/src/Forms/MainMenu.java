@@ -16,9 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class MainMenu extends javax.swing.JFrame {
     public static user1 user;
-    /**
-     * Creates new form MainMenu
-     */
+
     public MainMenu() {
         initComponents();
         setLocationRelativeTo(null);
