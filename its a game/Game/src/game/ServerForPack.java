@@ -59,7 +59,7 @@ public class ServerForPack implements Runnable
                 test=tmp;
                 try
                 {
-                    socketConnection = new ServerSocket(11111, 3);
+                    socketConnection = new ServerSocket(8383, 10);
                     Socket pipe = socketConnection.accept();
                     serverOutputStream=new ObjectOutputStream(pipe.getOutputStream());
                     serverOutputStream.writeObject(test);

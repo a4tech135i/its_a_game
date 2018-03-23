@@ -89,7 +89,7 @@ public class game_proc extends javax.swing.JFrame {
         jButton1.setVisible(false);
         ip = ip1;
         try {
-            socketConnection = new Socket(ip, 11111);
+            socketConnection = new Socket(ip, 8383);
             clientInputStream = new ObjectInputStream(socketConnection.getInputStream());
             testTmp = (Pack) clientInputStream.readObject();
             clientInputStream.close();
@@ -167,7 +167,7 @@ public class game_proc extends javax.swing.JFrame {
         jButton1.setVisible(false);
         ip = ip1;
         try {
-            socketConnection = new Socket(ip, 11111);
+            socketConnection = new Socket(ip, 8383);
             clientInputStream = new ObjectInputStream(socketConnection.getInputStream());
             testTmp = (Pack) clientInputStream.readObject();
             clientInputStream.close();

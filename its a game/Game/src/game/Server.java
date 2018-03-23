@@ -30,7 +30,7 @@ public class Server implements Runnable{
     public void run() {
         try 
         {
-            server = new ServerSocket(Constant.Port,3);
+            server = new ServerSocket(Constant.Port,10);
             while (true) {
               Socket socket = server.accept(); 
               Connection con = new Connection(socket);

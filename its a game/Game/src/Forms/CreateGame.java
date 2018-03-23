@@ -150,7 +150,8 @@ public class CreateGame extends javax.swing.JFrame{
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         new Thread(new ServerForPack(pack)).start();
         new Thread(new Server()).start();
-        game_proc form12 = new game_proc("127.0.0.1","123"); // TUT KAPEC
+        //game_proc form12 = new game_proc("127.0.0.1","123"); // TUT KAPEC
+        game_proc form12 = new game_proc(jTextField2.getText(),"123"); // TUT KAPEC
         form12.setTitle("Своя гра(хост)");
         form12.show();
         this.hide();
