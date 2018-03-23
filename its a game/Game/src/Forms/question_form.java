@@ -128,7 +128,7 @@ public class question_form extends javax.swing.JFrame {
         else
         {
             game_proc.balss -= aaa.getValue();
-            JOptionPane.showMessageDialog(null, "Відповідь неправельна!");
+            JOptionPane.showMessageDialog(null, "Відповідь неправильна!");
             this.hide();
             if(game_proc.yksho_1_raund)
             {
