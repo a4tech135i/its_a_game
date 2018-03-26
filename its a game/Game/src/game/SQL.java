@@ -5,12 +5,36 @@
  */
 package game;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Andriy
  */
-public class SQL {
-    private static final String url = "jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11225345?useUnicode=yes&characterEncoding=UTF-8";
-    private static final String user = "sql11225345";
-    private static final String password = "PhiZHGwtgQ";
+public class SQL implements Serializable{
+    private String url;
+    private String user;
+    private String password;
+    
+    public SQL(String u,String uu,String pass)
+    {
+        url = u;
+        user = uu;
+        password = pass;
+    }
+    
+    public String getUrl()
+    {
+        return url;
+    }
+    
+    public String getUser()
+    {
+        return user;
+    }
+    
+    public String getPassword()
+    {
+        return password;
+    }
 }

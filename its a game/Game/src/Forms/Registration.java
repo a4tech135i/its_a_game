@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package Forms;
+import game.SQL;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -20,15 +24,21 @@ import javax.swing.JOptionPane;
  */
 public class Registration extends javax.swing.JFrame {
     public static Connection con;
-    private static final String url = "jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11228372?useUnicode=yes&characterEncoding=UTF-8";
-    private static final String user = "sql11228372";
-    private static final String password = "BdQdyamlav";
+    private String url;
+    private String user;
+    private String password;
     /**
      * Creates new form Registration
      */
-    public Registration() {
+    public Registration() throws IOException, ClassNotFoundException {
         initComponents();
         setLocationRelativeTo(null);
+        FileInputStream fis = new FileInputStream("temp.out");
+        ObjectInputStream oin = new ObjectInputStream(fis);
+        SQL ts = (SQL) oin.readObject();
+        url = ts.getUrl();
+        user = ts.getUser();
+        password = ts.getPassword();
     }
 
     /**
@@ -234,11 +244,18 @@ public class Registration extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Registration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Registration().setVisible(true);
+                try {
+                    new Registration().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(Registration.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Registration.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

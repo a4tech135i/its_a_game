@@ -107,28 +107,34 @@ public class question_form extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String ans = jTextField1.getText().toLowerCase();
-        if(aaa.getAnswer().toLowerCase().equals(ans))
+        String[] asdg = aaa.getAnswer().split("|");
+        boolean as = true;
+        for(int i=0;i<asdg.length;i++)
         {
-            game_proc.balss += aaa.getValue();
-            JOptionPane.showMessageDialog(null, "Ви відповіли вірно!");
-            this.hide();
-            if(game_proc.yksho_1_raund)
+            if(asdg[i].toLowerCase().equals(ans))
             {
-                JOptionPane.showMessageDialog(null, "Кількість набраних балів = " + balss+ "\nПак закінчився!");
-                //game_proc.yksho_1_raund=false;
-                game_proc.client.sendMessage("vidpovid-"+game_proc.balss);
-                return;
-            }
-            if(game_proc.lll)
-            {
-                JOptionPane.showMessageDialog(null, "Раунд "+game_proc.tep_raund+"!");
-                game_proc.lll = false;
+                game_proc.balss += aaa.getValue();
+                JOptionPane.showMessageDialog(null, "Ви відповіли вірно!");
+                this.hide();
+                if(game_proc.yksho_1_raund)
+                {
+                    JOptionPane.showMessageDialog(null, "Кількість набраних балів = " + balss+ "\nПак закінчився!");
+                    //game_proc.yksho_1_raund=false;
+                    game_proc.client.sendMessage("vidpovid-"+game_proc.balss);
+                    return;
+                }
+                if(game_proc.lll)
+                {
+                    JOptionPane.showMessageDialog(null, "Раунд "+game_proc.tep_raund+"!");
+                    game_proc.lll = false;
+                }
+                as = false;
             }
         }
-        else
+        if(as)
         {
             game_proc.balss -= aaa.getValue();
-            JOptionPane.showMessageDialog(null, "Відповідь неправильна!");
+            JOptionPane.showMessageDialog(null, "Відповідь неправельна!");
             this.hide();
             if(game_proc.yksho_1_raund)
             {
@@ -184,6 +190,7 @@ public class question_form extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(question_form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

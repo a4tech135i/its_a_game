@@ -6,6 +6,9 @@
 package game;
 
 import Forms.Login;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,9 +18,15 @@ public class Game {
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Login frm=new Login();
-                frm.setTitle("Логін");
-                frm.setVisible(true);
+                try {
+                    Login frm=new Login();
+                    frm.setTitle("Логін");
+                    frm.setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
