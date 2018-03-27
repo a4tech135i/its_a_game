@@ -29,9 +29,8 @@ public class CreateGame extends javax.swing.JFrame{
         try {
             initComponents();
             setLocationRelativeTo(null);
-            URL whatismyip = new URL("http://checkip.amazonaws.com");
-            BufferedReader in = new BufferedReader(new InputStreamReader(whatismyip.openStream()));
-            ip1 = in.readLine();
+            String[] asdf = InetAddress.getLocalHost().toString().split("/");
+            ip1 = asdf[1];
             jTextField2.setText(ip1);
         } catch (IOException ex) {
             Logger.getLogger(CreateGame.class.getName()).log(Level.SEVERE, null, ex);
