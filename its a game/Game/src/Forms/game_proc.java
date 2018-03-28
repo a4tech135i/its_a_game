@@ -86,6 +86,11 @@ public class game_proc extends javax.swing.JFrame {
 
     public game_proc(String ip1) {
         initComponents();
+        jTextField1.setText("");
+        jTextField6.setText("");
+        jTextField2.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
         jButton1.setVisible(false);
         ip = ip1;
         try {
@@ -164,6 +169,11 @@ public class game_proc extends javax.swing.JFrame {
 
     public game_proc(String ip1, String e) {
         initComponents();
+        jTextField1.setText("");
+        jTextField6.setText("");
+        jTextField2.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
         jButton1.setVisible(false);
         ip = ip1;
         try {
@@ -281,7 +291,7 @@ public class game_proc extends javax.swing.JFrame {
             jLabel16.setText("1 з " + kikl_raund);
         }
         if (raund1.size() == 1) {
-            jLabel6.setText(raund1.get(0));
+            jTextField1.setText(raund1.get(0));
             ryad2(false);
             ryad3(false);
             ryad4(false);
@@ -333,8 +343,8 @@ public class game_proc extends javax.swing.JFrame {
             });
         }
         if (raund1.size() == 2) {
-            jLabel6.setText(raund1.get(0));
-            jLabel8.setText(raund1.get(1));
+            jTextField1.setText(raund1.get(0));
+            jTextField6.setText(raund1.get(1));
             ryad3(false);
             ryad4(false);
             ryad5(false);
@@ -430,9 +440,9 @@ public class game_proc extends javax.swing.JFrame {
             });
         }
         if (raund1.size() == 3) {
-            jLabel6.setText(raund1.get(0));
-            jLabel8.setText(raund1.get(1));
-            jLabel7.setText(raund1.get(2));
+            jTextField1.setText(raund1.get(0));
+            jTextField6.setText(raund1.get(1));
+            jTextField2.setText(raund1.get(2));
             ryad4(false);
             ryad5(false);
             jButton8.addActionListener(new ActionListener() {
@@ -572,10 +582,10 @@ public class game_proc extends javax.swing.JFrame {
             });
         }
         if (raund1.size() == 4) {
-            jLabel6.setText(raund1.get(0));
-            jLabel8.setText(raund1.get(1));
-            jLabel7.setText(raund1.get(2));
-            jLabel9.setText(raund1.get(3));
+            jTextField1.setText(raund1.get(0));
+            jTextField6.setText(raund1.get(1));
+            jTextField2.setText(raund1.get(2));
+            jTextField4.setText(raund1.get(3));
             ryad5(false);
             jButton8.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -758,11 +768,11 @@ public class game_proc extends javax.swing.JFrame {
             });
         }
         if (raund1.size() == 5) {
-            jLabel6.setText(raund1.get(0));
-            jLabel8.setText(raund1.get(1));
-            jLabel7.setText(raund1.get(2));
-            jLabel9.setText(raund1.get(3));
-            jLabel10.setText(raund1.get(4));
+            jTextField1.setText(raund1.get(0));
+            jTextField6.setText(raund1.get(1));
+            jTextField2.setText(raund1.get(2));
+            jTextField4.setText(raund1.get(3));
+            jTextField5.setText(raund1.get(4));
             jButton8.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund1.get(0), 100));
@@ -985,7 +995,7 @@ public class game_proc extends javax.swing.JFrame {
         ryad5(true);
         //jButton8.removeActionListener(jButton8.getAction());
         if (raund2.size() == 1) {
-            jLabel6.setText(raund2.get(0));
+            jTextField1.setText(raund2.get(0));
             ryad2(false);
             ryad3(false);
             ryad4(false);
@@ -1032,8 +1042,8 @@ public class game_proc extends javax.swing.JFrame {
             });
         }
         if (raund2.size() == 2) {
-            jLabel6.setText(raund2.get(0));
-            jLabel8.setText(raund2.get(1));
+            jTextField1.setText(raund2.get(0));
+            jTextField6.setText(raund2.get(1));
             ryad3(false);
             ryad4(false);
             ryad5(false);
@@ -1119,9 +1129,9 @@ public class game_proc extends javax.swing.JFrame {
             });
         }
         if (raund2.size() == 3) {
-            jLabel6.setText(raund2.get(0));
-            jLabel8.setText(raund2.get(1));
-            jLabel7.setText(raund2.get(2));
+            jTextField1.setText(raund2.get(0));
+            jTextField6.setText(raund2.get(1));
+            jTextField2.setText(raund2.get(2));
             ryad4(false);
             ryad5(false);
             jButton8.addActionListener(new ActionListener() {
@@ -1246,10 +1256,10 @@ public class game_proc extends javax.swing.JFrame {
             });
         }
         if (raund2.size() == 4) {
-            jLabel6.setText(raund2.get(0));
-            jLabel8.setText(raund2.get(1));
-            jLabel7.setText(raund2.get(2));
-            jLabel9.setText(raund2.get(3));
+            jTextField1.setText(raund2.get(0));
+            jTextField6.setText(raund2.get(1));
+            jTextField2.setText(raund2.get(2));
+            jTextField4.setText(raund2.get(3));
             ryad5(false);
             jButton8.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -1413,11 +1423,11 @@ public class game_proc extends javax.swing.JFrame {
             });
         }
         if (raund2.size() == 5) {
-            jLabel6.setText(raund2.get(0));
-            jLabel8.setText(raund2.get(1));
-            jLabel7.setText(raund2.get(2));
-            jLabel9.setText(raund2.get(3));
-            jLabel10.setText(raund2.get(4));
+            jTextField1.setText(raund2.get(0));
+            jTextField6.setText(raund2.get(1));
+            jTextField2.setText(raund2.get(2));
+            jTextField4.setText(raund2.get(3));
+            jTextField5.setText(raund2.get(4));
             jButton8.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund2.get(0), 100));
@@ -1631,7 +1641,7 @@ public class game_proc extends javax.swing.JFrame {
         ryad5(true);
         //jButton8.removeActionListener(jButton8.getAction());
         if (raund3.size() == 1) {
-            jLabel6.setText(raund3.get(0));
+            jTextField1.setText(raund3.get(0));
             ryad2(false);
             ryad3(false);
             ryad4(false);
@@ -1678,8 +1688,8 @@ public class game_proc extends javax.swing.JFrame {
             });
         }
         if (raund3.size() == 2) {
-            jLabel6.setText(raund3.get(0));
-            jLabel8.setText(raund3.get(1));
+            jTextField1.setText(raund3.get(0));
+            jTextField6.setText(raund3.get(1));
             ryad3(false);
             ryad4(false);
             ryad5(false);
@@ -1765,9 +1775,9 @@ public class game_proc extends javax.swing.JFrame {
             });
         }
         if (raund3.size() == 3) {
-            jLabel6.setText(raund3.get(0));
-            jLabel8.setText(raund3.get(1));
-            jLabel7.setText(raund3.get(2));
+            jTextField1.setText(raund3.get(0));
+            jTextField6.setText(raund3.get(1));
+            jTextField2.setText(raund3.get(2));
             ryad4(false);
             ryad5(false);
             jButton8.addActionListener(new ActionListener() {
@@ -1892,10 +1902,10 @@ public class game_proc extends javax.swing.JFrame {
             });
         }
         if (raund3.size() == 4) {
-            jLabel6.setText(raund3.get(0));
-            jLabel8.setText(raund3.get(1));
-            jLabel7.setText(raund3.get(2));
-            jLabel9.setText(raund3.get(3));
+            jTextField1.setText(raund3.get(0));
+            jTextField6.setText(raund3.get(1));
+            jTextField2.setText(raund3.get(2));
+            jTextField4.setText(raund3.get(3));
             ryad5(false);
             jButton8.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -2059,11 +2069,11 @@ public class game_proc extends javax.swing.JFrame {
             });
         }
         if (raund3.size() == 5) {
-            jLabel6.setText(raund3.get(0));
-            jLabel8.setText(raund3.get(1));
-            jLabel7.setText(raund3.get(2));
-            jLabel9.setText(raund3.get(3));
-            jLabel10.setText(raund3.get(4));
+            jTextField1.setText(raund3.get(0));
+            jTextField6.setText(raund3.get(1));
+            jTextField2.setText(raund3.get(2));
+            jTextField4.setText(raund3.get(3));
+            jTextField5.setText(raund3.get(4));
             jButton8.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund3.get(0), 100));
@@ -2277,7 +2287,7 @@ public class game_proc extends javax.swing.JFrame {
         ryad5(true);
         //jButton8.removeActionListener(jButton8.getAction());
         if (raund4.size() == 1) {
-            jLabel6.setText(raund4.get(0));
+            jTextField1.setText(raund4.get(0));
             ryad2(false);
             ryad3(false);
             ryad4(false);
@@ -2324,8 +2334,8 @@ public class game_proc extends javax.swing.JFrame {
             });
         }
         if (raund4.size() == 2) {
-            jLabel6.setText(raund4.get(0));
-            jLabel8.setText(raund4.get(1));
+            jTextField1.setText(raund4.get(0));
+            jTextField6.setText(raund4.get(1));
             ryad3(false);
             ryad4(false);
             ryad5(false);
@@ -2411,9 +2421,9 @@ public class game_proc extends javax.swing.JFrame {
             });
         }
         if (raund4.size() == 3) {
-            jLabel6.setText(raund4.get(0));
-            jLabel8.setText(raund4.get(1));
-            jLabel7.setText(raund4.get(2));
+            jTextField1.setText(raund4.get(0));
+            jTextField6.setText(raund4.get(1));
+            jTextField2.setText(raund4.get(2));
             ryad4(false);
             ryad5(false);
             jButton8.addActionListener(new ActionListener() {
@@ -2538,10 +2548,10 @@ public class game_proc extends javax.swing.JFrame {
             });
         }
         if (raund4.size() == 4) {
-            jLabel6.setText(raund4.get(0));
-            jLabel8.setText(raund4.get(1));
-            jLabel7.setText(raund4.get(2));
-            jLabel9.setText(raund4.get(3));
+            jTextField1.setText(raund4.get(0));
+            jTextField6.setText(raund4.get(1));
+            jTextField2.setText(raund4.get(2));
+            jTextField4.setText(raund4.get(3));
             ryad5(false);
             jButton8.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -2705,11 +2715,11 @@ public class game_proc extends javax.swing.JFrame {
             });
         }
         if (raund4.size() == 5) {
-            jLabel6.setText(raund4.get(0));
-            jLabel8.setText(raund4.get(1));
-            jLabel7.setText(raund4.get(2));
-            jLabel9.setText(raund4.get(3));
-            jLabel10.setText(raund4.get(4));
+            jTextField1.setText(raund4.get(0));
+            jTextField6.setText(raund4.get(1));
+            jTextField2.setText(raund4.get(2));
+            jTextField4.setText(raund4.get(3));
+            jTextField5.setText(raund4.get(4));
             jButton8.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     question_form form12 = new question_form(testTmp.getQuestionByThemeAndValue(raund4.get(0), 100));
@@ -2914,7 +2924,7 @@ public class game_proc extends javax.swing.JFrame {
     }
     
     private void ryad1(boolean a) {
-        jLabel6.setVisible(a);
+        jTextField1.setVisible(a);
         jButton8.setVisible(a);
         jButton9.setVisible(a);
         jButton10.setVisible(a);
@@ -2923,7 +2933,7 @@ public class game_proc extends javax.swing.JFrame {
     }
 
     private void ryad2(boolean a) {
-        jLabel8.setVisible(a);
+        jTextField6.setVisible(a);
         jButton3.setVisible(a);
         jButton4.setVisible(a);
         jButton5.setVisible(a);
@@ -2932,7 +2942,7 @@ public class game_proc extends javax.swing.JFrame {
     }
 
     private void ryad3(boolean a) {
-        jLabel7.setVisible(a);
+        jTextField2.setVisible(a);
         jButton18.setVisible(a);
         jButton14.setVisible(a);
         jButton23.setVisible(a);
@@ -2941,7 +2951,7 @@ public class game_proc extends javax.swing.JFrame {
     }
 
     private void ryad4(boolean a) {
-        jLabel9.setVisible(a);
+        jTextField4.setVisible(a);
         jButton13.setVisible(a);
         jButton20.setVisible(a);
         jButton15.setVisible(a);
@@ -2950,7 +2960,7 @@ public class game_proc extends javax.swing.JFrame {
     }
 
     private void ryad5(boolean a) {
-        jLabel10.setVisible(a);
+        jTextField5.setVisible(a);
         jButton19.setVisible(a);
         jButton21.setVisible(a);
         jButton22.setVisible(a);
@@ -2982,11 +2992,6 @@ public class game_proc extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -3013,6 +3018,11 @@ public class game_proc extends javax.swing.JFrame {
         jButton26 = new javax.swing.JButton();
         jButton27 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
+        jTextField6 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 153, 255));
@@ -3103,14 +3113,14 @@ public class game_proc extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel20)
-                    .addComponent(jLabel21)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel22)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel23)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel23))
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel21))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3129,31 +3139,6 @@ public class game_proc extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Раунд №");
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel6.setText("jLabel6");
-        jLabel6.setMinimumSize(null);
-        jLabel6.setPreferredSize(new java.awt.Dimension(150, 50));
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel7.setText("jLabel7");
-        jLabel7.setMinimumSize(null);
-        jLabel7.setPreferredSize(new java.awt.Dimension(150, 50));
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("jLabel8");
-        jLabel8.setMinimumSize(null);
-        jLabel8.setPreferredSize(new java.awt.Dimension(150, 50));
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel9.setText("jLabel9");
-        jLabel9.setMinimumSize(null);
-        jLabel9.setPreferredSize(new java.awt.Dimension(150, 50));
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel10.setText("jLabel10");
-        jLabel10.setMinimumSize(null);
-        jLabel10.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jButton3.setBackground(new java.awt.Color(0, 0, 153));
         jButton3.setFont(new java.awt.Font("Latha", 1, 14)); // NOI18N
@@ -3363,6 +3348,21 @@ public class game_proc extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel16.setText("jLabel16");
 
+        jTextField1.setEditable(false);
+
+        jTextField2.setEditable(false);
+
+        jTextField4.setEditable(false);
+
+        jTextField5.setEditable(false);
+
+        jTextField6.setEditable(false);
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -3381,14 +3381,15 @@ public class game_proc extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField1)
+                                    .addComponent(jTextField2)
+                                    .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTextField5)
+                                    .addComponent(jTextField6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3402,10 +3403,8 @@ public class game_proc extends javax.swing.JFrame {
                                             .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(27, 27, 27)
                                         .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(26, 26, 26)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3441,7 +3440,7 @@ public class game_proc extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -3460,48 +3459,52 @@ public class game_proc extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel16))
-                .addGap(84, 84, 84)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(87, 87, 87)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(1, 1, 1)
+                            .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(1, 1, 1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
@@ -3580,6 +3583,10 @@ public class game_proc extends javax.swing.JFrame {
         client.stopClient();
     }//GEN-LAST:event_formWindowClosed
 
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3644,7 +3651,6 @@ public class game_proc extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel16;
     public javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -3654,13 +3660,14 @@ public class game_proc extends javax.swing.JFrame {
     public javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }
