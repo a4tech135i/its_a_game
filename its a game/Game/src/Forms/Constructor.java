@@ -42,6 +42,7 @@ public class Constructor extends javax.swing.JFrame {
      */
     public Constructor() {
         initComponents();
+        setLocationRelativeTo(null);
         buttonGroup1 = new ButtonGroup();
         buttonGroup1.add(jRadioButton1);
         buttonGroup1.add(jRadioButton2);
@@ -111,11 +112,14 @@ public class Constructor extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
             }
         });
 
@@ -571,6 +575,13 @@ public class Constructor extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        MainMenu form12 = new MainMenu(MainMenu.user);
+        form12.setTitle("Головне меню");
+        this.hide();
+        form12.show();
+    }//GEN-LAST:event_formWindowClosing
 
     private void checkpack() {
         NumberQuestion = Integer.parseInt(jTextField2.getText());

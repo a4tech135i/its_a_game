@@ -98,6 +98,11 @@ public class QuestionView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -279,6 +284,13 @@ public class QuestionView extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         if(!jTextField1.getText().isEmpty()) name = jTextField1.getText();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        Constructor form12 = new Constructor();
+        form12.setTitle("Constructor");
+        this.hide();
+        form12.show();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

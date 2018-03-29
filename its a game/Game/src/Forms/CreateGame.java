@@ -54,7 +54,12 @@ public class CreateGame extends javax.swing.JFrame{
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Пак питань");
@@ -155,6 +160,13 @@ public class CreateGame extends javax.swing.JFrame{
         form12.show();
         this.hide();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        MainMenu form12 = new MainMenu(MainMenu.user);
+        form12.setTitle("Головне меню");
+        this.hide();
+        form12.show();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

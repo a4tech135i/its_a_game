@@ -3024,7 +3024,7 @@ public class game_proc extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(0, 153, 255));
         setForeground(new java.awt.Color(51, 153, 255));
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -3576,7 +3576,10 @@ public class game_proc extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        
+        MainMenu form12 = new MainMenu(MainMenu.user);
+        form12.setTitle("Головне меню");
+        this.hide();
+        form12.show();
     }//GEN-LAST:event_formWindowClosing
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed

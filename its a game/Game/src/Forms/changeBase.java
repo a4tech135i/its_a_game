@@ -27,6 +27,7 @@ public class changeBase extends javax.swing.JFrame {
      */
     public changeBase() throws IOException, ClassNotFoundException {
         initComponents();
+        setLocationRelativeTo(null);
         FileInputStream fis = new FileInputStream("temp.out");
         ObjectInputStream oin = new ObjectInputStream(fis);
         SQL ts = (SQL) oin.readObject();
@@ -60,7 +61,12 @@ public class changeBase extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Введіть дані бази даних:");
         jLabel1.setToolTipText("");
@@ -152,6 +158,19 @@ public class changeBase extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        try {
+            Login form12 = new Login();
+            form12.setTitle("Авторизація");
+            this.hide();
+            form12.show();
+        } catch (IOException ex) {
+            Logger.getLogger(changeBase.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(changeBase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
