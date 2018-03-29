@@ -54,7 +54,6 @@ public class QuestionView extends javax.swing.JFrame {
         for (int i = 0; i < questions.size(); i++) {
             Object[] objs = {i + 1, questions.get(i).getTheme(), questions.get(i).getText(), questions.get(i).getAnswer(), questions.get(i).getValue()};
             tableModel.addRow(objs);
-
         }
         jTable1.setModel(tableModel);
         if (!themes) {

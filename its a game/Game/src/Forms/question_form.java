@@ -5,8 +5,20 @@
  */
 package Forms;
 
+import static Forms.Registration.con;
 import static Forms.game_proc.balss;
 import game.Question;
+import game.SQL;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,19 +27,50 @@ import javax.swing.JOptionPane;
  */
 public class question_form extends javax.swing.JFrame {
     Question aaa;
+    public static Connection con;
+    private String url;
+    private String user;
+    private String password;
     /**
      * Creates new form question_form
      */
-    public question_form() {
+    public question_form() throws FileNotFoundException, IOException, ClassNotFoundException {
         initComponents();
         setLocationRelativeTo(null);
+        FileInputStream fis = new FileInputStream("temp.out");
+        ObjectInputStream oin = new ObjectInputStream(fis);
+        SQL ts = (SQL) oin.readObject();
+        url = ts.getUrl();
+        user = ts.getUser();
+        password = ts.getPassword();
     }
     
     public question_form(Question a) {
-        initComponents();
-        aaa = a;
-        setLocationRelativeTo(null);
-        jTextArea1.setText(aaa.getText());
+        FileInputStream fis = null;
+        try {
+            initComponents();
+            aaa = a;
+            setLocationRelativeTo(null);
+            jTextArea1.setText(aaa.getText());
+            fis = new FileInputStream("temp.out");
+            ObjectInputStream oin = new ObjectInputStream(fis);
+            SQL ts = (SQL) oin.readObject();
+            url = ts.getUrl();
+            user = ts.getUser();
+            password = ts.getPassword();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(question_form.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(question_form.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(question_form.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                fis.close();
+            } catch (IOException ex) {
+                Logger.getLogger(question_form.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     /**
@@ -122,10 +165,21 @@ public class question_form extends javax.swing.JFrame {
                 this.hide();
                 if(game_proc.yksho_1_raund)
                 {
-                    JOptionPane.showMessageDialog(null, "Кількість набраних балів = " + balss+ "\nПак закінчився!");
-                    //game_proc.yksho_1_raund=false;
-                    game_proc.client.sendMessage("vidpovid-"+game_proc.balss);
-                    return;
+                    try {
+                        JOptionPane.showMessageDialog(null, "Кількість набраних балів = " + balss+ "\nПак закінчився!");
+                        //game_proc.yksho_1_raund=false;
+                        game_proc.client.sendMessage("vidpovid-"+game_proc.balss);
+                        con = DriverManager.getConnection(url, user, password);
+                        PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO record (login, pack, count) VALUES (?, ?, ?)");
+                        preparedStatement.setString(1, MainMenu.user.getLogin());
+                        preparedStatement.setString(2, game_proc.testTmp.getName());
+                        preparedStatement.setString(3, String.valueOf(game_proc.balss));
+                        preparedStatement.executeUpdate();
+                        
+                        return;
+                    } catch (SQLException ex) {
+                        Logger.getLogger(question_form.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 if(game_proc.lll)
                 {
@@ -142,10 +196,20 @@ public class question_form extends javax.swing.JFrame {
             this.hide();
             if(game_proc.yksho_1_raund)
             {
-                JOptionPane.showMessageDialog(null, "Кількість набраних балів = " + balss+ "\nПак закінчився!");
-                //game_proc.yksho_1_raund=false;
-                //game_proc.client.sendMessage("%*"+game_proc.balss);
-                return;
+                try {
+                    JOptionPane.showMessageDialog(null, "Кількість набраних балів = " + balss+ "\nПак закінчився!");
+                    //game_proc.yksho_1_raund=false;
+                    //game_proc.client.sendMessage("%*"+game_proc.balss);
+                    con = DriverManager.getConnection(url, user, password);
+                    PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO record (login, pack, count) VALUES (?, ?, ?)");
+                    preparedStatement.setString(1, MainMenu.user.getLogin());
+                    preparedStatement.setString(2, game_proc.testTmp.getName());
+                    preparedStatement.setString(3, String.valueOf(game_proc.balss));
+                    preparedStatement.executeUpdate();
+                    return;
+                } catch (SQLException ex) {
+                    Logger.getLogger(question_form.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             if(game_proc.lll)
             {
@@ -158,14 +222,34 @@ public class question_form extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         if(game_proc.yksho_1_raund)
         {
-            JOptionPane.showMessageDialog(null, "Кількість набраних балів = " + balss+ "\nПак закінчився!");
+            try {
+                JOptionPane.showMessageDialog(null, "Кількість набраних балів = " + balss+ "\nПак закінчився!");
+                con = DriverManager.getConnection(url, user, password);
+                PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO record (login, pack, count) VALUES (?, ?, ?)");
+                preparedStatement.setString(1, MainMenu.user.getLogin());
+                preparedStatement.setString(2, game_proc.testTmp.getName());
+                preparedStatement.setString(3, String.valueOf(game_proc.balss));
+                preparedStatement.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(question_form.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_formWindowClosed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         if(game_proc.yksho_1_raund)
         {
-            JOptionPane.showMessageDialog(null, "Кількість набраних балів = " + balss+ "\nПак закінчився!");
+            try {
+                JOptionPane.showMessageDialog(null, "Кількість набраних балів = " + balss+ "\nПак закінчився!");
+                con = DriverManager.getConnection(url, user, password);
+                PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO record (login, pack, count) VALUES (?, ?, ?)");
+                preparedStatement.setString(1, MainMenu.user.getLogin());
+                preparedStatement.setString(2, game_proc.testTmp.getName());
+                preparedStatement.setString(3, String.valueOf(game_proc.balss));
+                preparedStatement.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(question_form.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_formWindowClosing
 
@@ -200,7 +284,13 @@ public class question_form extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new question_form().setVisible(true);
+                try {
+                    new question_form().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(question_form.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(question_form.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

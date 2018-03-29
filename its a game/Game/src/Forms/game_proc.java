@@ -34,7 +34,7 @@ public class game_proc extends javax.swing.JFrame {
     static Client client;
     private Socket socketConnection;
     ObjectInputStream clientInputStream;
-    Pack testTmp;
+    static Pack testTmp;
     static int balss = 0;
     static boolean yksho_1_raund = false;
     static boolean lll = false;
